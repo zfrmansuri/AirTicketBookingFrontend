@@ -14,20 +14,19 @@ const FlightSearch = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-  const adjustedDate = date ? new Date(date) : null;
-  if (adjustedDate) {
-    adjustedDate.setDate(adjustedDate.getDate() + 1); // Increment the date by 1
-  }
+    const adjustedDate = date ? new Date(date) : null;
+    if (adjustedDate) {
+      adjustedDate.setDate(adjustedDate.getDate() + 1); // Increment the date by 1
+    }
 
-  navigate("/flights", {
-    state: {
-      origin,
-      destination,
-      date: adjustedDate
-    },
-  });
-};
-
+    navigate("/flights", {
+      state: {
+        origin,
+        destination,
+        date: adjustedDate
+      },
+    });
+  };
 
   return (
     <div className="flightSearchContainer">
@@ -63,7 +62,6 @@ const FlightSearch = () => {
               onChange={(date) => setDate(date)} // DatePicker returns a Date object
               placeholderText="Select date" // Custom placeholder
               dateFormat="yyyy-MM-dd" // Desired format for display
-              
             />
             <img
               src={DateImg} // Path to the calendar icon

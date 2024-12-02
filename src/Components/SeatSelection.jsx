@@ -12,8 +12,8 @@ const SeatSelectionPage = () => {
     const fetchFlightDetails = async () => {
       try {
         const data = await getFlightDetails(flightId);
-        console.log("flight details", data)
-        console.log("flight details", data.flightSeats.$values)
+        console.log("flight details", data);
+        console.log("flight seats", data.flightSeats.$values); // Added a clearer log
         setFlight(data.flightSeats.$values);
       } catch (err) {
         setError(err.response?.data?.Message || "Error fetching flight details.");
@@ -29,7 +29,7 @@ const SeatSelectionPage = () => {
   if (error) return <p>{error}</p>;
 
   const handleSeatSelection = (seatId) => {
-    console.log(`Seat ${seatId} selected.`);
+    console.log(`Seat ${seatId} selected.`); // Corrected template literal
     // Add booking logic here
   };
 

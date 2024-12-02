@@ -1,0 +1,75 @@
+/* Seat Icon Styles */
+.seat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .seat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Available Seat Styles */
+  .available {
+    background-color: #4CAF50; /* Green for available seats */
+  }
+  
+  /* Unavailable Seat Styles */
+  .unavailable {
+    background-color: #f44336; /* Red for unavailable seats */
+    cursor: not-allowed;
+  }
+  
+  /* Selected Seat Styles (Changed to Red) */
+  .selected {
+    background-color: #e53935; /* Red for selected seats */
+    border-color: #fff;
+  }
+  
+  /* General button styles */
+  button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 5 seats per row */
+    gap: 10px;
+    justify-items: center;
+  }
+  
+  .mt-4 {
+    margin-top: 16px;
+  }
+  
+  .mb-6 {
+    margin-bottom: 24px;
+  }
+  

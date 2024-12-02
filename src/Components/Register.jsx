@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom"; // Import Link
 import "../CSS/Register.css"; // Assuming you have the CSS file ready
 
 const Register = () => {
@@ -36,7 +36,7 @@ const Register = () => {
             localStorage.setItem("token", loginResponse.data.token); // Save JWT
             navigate(redirectTo); // Redirect to the page where the user came from
         } catch (err) {
-            console.log(err)
+            console.log(err);
             setError(err.response?.data?.title || "Registration failed.");
         }
     };
@@ -121,7 +121,8 @@ const Register = () => {
                     <button type="submit" className="register-button">Signup</button>
                 </form>
                 <p className="signup-text">
-                    Already have an account? <span className="login-link">Login</span>
+                    Already have an account?{" "}
+                    <Link to="/login" className="login-link">Login</Link>
                 </p>
             </div>
         </div>

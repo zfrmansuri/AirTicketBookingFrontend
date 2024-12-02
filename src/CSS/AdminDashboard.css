@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    position: relative;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .hamburger-menu .bar {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+  
+  .sidebar.open {
+    left: 0; /* Sidebar slides in when open */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #45a049;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-container.menu-open .main-content {
+    margin-left: 250px; /* Shift the content when sidebar is open */
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px; /* Slightly smaller sidebar on mobile */
+    }
+  
+    .hamburger-menu {
+      top: 15px;
+      left: 15px;
+    }
+  
+    .dashboard-container.menu-open .main-content {
+      margin-left: 200px; /* Adjust content margin for mobile */
+    }
+  }
+  
