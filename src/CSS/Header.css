@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
-.HeaderContainer{
+
+.HeaderContainer {
     font-family: "Parkinsans", sans-serif;
     display: flex;
     position: relative;
@@ -12,32 +13,54 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.logoContainer img{
+.logoContainer img {
     width: 40px;
     height: 40px;
 }
 
-.navigationContainer a{
+.navigationContainer a {
     color: #484848;
     margin: 20px;
     text-decoration: none;
     transition: 0.4s border;
-  border-bottom: 0.1em solid transparent;
+    border-bottom: 0.1em solid transparent;
 }
 
-.navigationContainer a:hover{
+.navigationContainer a:hover {
     border-color: currentColor;
     color: #212121;
 }
 
-.loginRegister a{
+.loginRegister a {
     display: inline;
     font-size: 20px;
     margin: 20px;
-    width:50px;
+    width: 50px;
     background-color: #0d9348;
     color: #fff;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 5px;
+}
+
+/* New Logout Button Styling */
+.loginRegister button {
+    font-size: 20px;
+    margin: 20px;
+    padding: 5px 10px;
+    background-color: #e74c3c; /* Red color for logout */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loginRegister button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+    color: #fff;
+}
+
+.loginRegister button:focus {
+    outline: none; /* Remove focus outline */
 }

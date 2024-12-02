@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";  // Correct import
 import "../CSS/Login.css"; // Include the CSS file for styling
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-    const redirectTo = location.state?.from || "/";
+    const redirectTo = location.state?.from || "/"; // Set redirect after login
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,9 +20,26 @@ const Login = () => {
                 email,
                 password,
             });
-            localStorage.setItem("token", response.data.token.token); // Save JWT
-            console.log(response.data.token.token)
-            navigate(redirectTo); // Redirect to the page where the user came from
+            const token = response.data.token.token;
+            localStorage.setItem("token", token); // Save JWT
+
+            // Decode the token to get the user's role
+            const decodedToken = jwtDecode(token);
+            console.log(decodedToken); // Log the decoded token to check the role
+
+            // Navigate based on role
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Access role from decoded token
+
+            if (userRole === "Admin") {
+                navigate("/admin-dashboard");  // Admin Dashboard
+            } else if (userRole === "User") {
+                navigate("/user-dashboard");  // User Dashboard
+            } else if (userRole === "FlightOwner") {
+                navigate("/flightowner-dashboard");  // FlightOwner Dashboard
+            } else {
+                // Default redirect if role is not matched
+                navigate(redirectTo);
+            }
         } catch (err) {
             setError("Invalid login credentials.");
         }
@@ -53,7 +71,6 @@ const Login = () => {
                     {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="login-button">Login</button>
                 </form>
-                {/* <a href="#" className="forgot-password">Forgot password?</a> */}
                 <p className="signup-text">
                     Don't have an account? <span onClick={handleRegisterRedirect} className="signup-link">Signup</span>
                 </p>
