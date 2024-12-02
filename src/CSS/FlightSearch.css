@@ -27,7 +27,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 40vw;
+  /* width: 40vw; */
+  padding: 10px 55px;
   height: 35vh;
   margin-right: 3vw;
   border-radius: 10px;
