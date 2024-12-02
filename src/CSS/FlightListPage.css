@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.flightListWrapper{
+    background-color: #f6f6f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 92vh;
+}
+
+.flightListItem {
+    margin-top: 25px;
+    padding: 18px 30px;
+    display: flex;
+    background: #fff;
+    border-radius: 5px;
+    align-items: center;
+    width: 60vw;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.flightName{
+}
+
+.flightName h3{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 6px;
+}
+
+.flightNameImg{
+    display: flex;
+    flex-direction: row;
+    color: #e9ba11;
+    align-items: center;
+}
+
+.flightNameImg p{
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 4px;
+}
+
+.flightOriginDestination{
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flightOriginDestination p{
+    font-size: 20px;
+    font-family: "poppins", sans-serif;
+    font-weight: 500;
+}
+
+.flightPriceBookSeatContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.flightPriceBookSeatContainer h3{
+    font-family: "Parkinsans", sans-serif;
+    font-weight: 500;
+    color: green;
+}
+
+.flightPriceBookSeatContainer p{
+    font-family: "Parkinsans", sans-serif;
+    font-size: 15px;
+}
+
+.flightPriceBookSeatContainer button{
+    border: none;
+    cursor: pointer;
+    padding: 5px 7px;
+    border-radius: 4px;
+    color: white;
+    font-family: "Parkinsans", sans-serif;
+    background-color: #0d9348;
+    margin-top: 4px;
+    transition: 0.3s ease-in;
+}
+
+
+.flightPriceBookSeatContainer button:hover{
+    background-color: #01672d;
+    box-shadow: rgb(0, 0, 0, 0.25) 0 0px 3px;
+}
+
+
+.flightIdImg{
+    width: 20px;
+    height: 20px;
+}

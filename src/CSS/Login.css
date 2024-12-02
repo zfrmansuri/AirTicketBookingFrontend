@@ -1,0 +1,105 @@
+.login-page {
+    background-image: url(../Images/main-bg.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 91vh;
+}
+
+/* Login container styling */
+.login-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+}
+
+/* Title styling */
+.login-title {
+    font-size: 26px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 20px;
+    font-family: "Parkinsans", sans-serif;
+}
+
+/* Form styling */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    border: 1px solid #cccccc;
+    font-family: "Parkinsans", sans-serif;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.input-field::placeholder{
+    font-family: "Parkinsans", sans-serif;
+  vertical-align: middle;
+  line-height: 1.5;
+  font-size: 17px;
+  padding: 10px;
+  color: #999;
+}
+
+/* Button styling */
+.login-button {
+    background-color: #0d9348;
+    color: white;
+    font-family: "Parkinsans", sans-serif;
+    border: none;
+    padding: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #037835;
+}
+
+/* Forgot password link */
+.forgot-password {
+    color: #00897b;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Signup text */
+.signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.signup-link {
+    color: #00897b;
+    cursor: pointer;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}

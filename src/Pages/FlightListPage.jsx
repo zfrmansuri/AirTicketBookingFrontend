@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { searchFlights } from "../Api/flightAPI";
+import "../CSS/FlightListPage.css"
+import arrowImg from "../Images/arrow.svg";
+import airplaneImg from "../Images/airplane.svg"
+
 
 const FlightListPage = () => {
   const navigate = useNavigate();
@@ -13,7 +17,7 @@ const FlightListPage = () => {
   useEffect(() => {
     const fetchFlights = async () => {
       try {
-        console.log("another one",date);
+        console.log("another one", date);
         const response = await searchFlights(origin, destination, date);
         console.log("Raw API response:", response);
 
@@ -41,35 +45,49 @@ const FlightListPage = () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        // Redirect to login if not authenticated
-        navigate("/login", { state: { from: `/seat-selection/${flightId}` } });
+      // Redirect to login if not authenticated
+      navigate("/login", { state: { from: `/seat-selection/${flightId}` } });
     } else {
-        // Redirect to seat selection if authenticated
-        // navigate("/seat-selection");
-        navigate(`/seat-selection/${flightId}`);
+      // Redirect to seat selection if authenticated
+      // navigate("/seat-selection");
+      navigate(`/seat-selection/${flightId}`);
     }
-};
+  };
 
   return (
-    <div>
-      <h2>Available Flights</h2>
-      {flights.length > 0 ? (
-        <ul>
-          {flights.map((flight) => (
-            <li key={flight.flightId}>
-              <h3>Flight Number: {flight.flightNumber}</h3>
-              <p>Origin: {flight.origin}</p>
-              <p>Destination: {flight.destination}</p>
-              <p>Price: ${flight.pricePerSeat}</p>
-              <p>Seats Available: {flight.availableSeats}</p>
-              <button onClick={() => handleBookNow(flight.flightId)}>Book Now</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No flights found matching the criteria.</p>
-      )}
+    <div className="flightListWrapper">
+      {
+        flights.length > 0 ? (
+          <>
+            {flights.map((flight) => (
+                        <div className="flightListItem">
+
+                <div className="flightName">
+                  <h3>Flight Id:</h3>
+                  <div className="flightNameImg">
+                    <img src={airplaneImg} alt="img" style={{width:"15px"}} className="flightIdImg"/>
+                    <p>{flight.flightNumber}</p>
+                  </div>
+                </div>
+                <div className="flightOriginDestination">
+                  <p>{flight.origin}</p>
+                  <img src={arrowImg} alt="img" className="flightIdImg"/>
+                  <p>{flight.destination}</p>
+                </div>
+                <div className="flightPriceBookSeatContainer">
+                  <h3>${flight.pricePerSeat}</h3>
+                  <p>Seats: {flight.availableSeats}</p>
+                  <button onClick={() => handleBookNow(flight.flightId)}>Select Seat</button>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p>No flights found matching the criteria.</p>
+        )
+      }
     </div>
+
   );
 };
 

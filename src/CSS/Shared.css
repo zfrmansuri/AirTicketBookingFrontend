@@ -1,0 +1,79 @@
+/* shared.css */
+
+/* General page styling */
+
+/* Container styling */
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    text-align: center;
+}
+
+/* Title styling */
+.title {
+    font-size: 26px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 20px;
+    font-family: "Parkinsans", sans-serif;
+}
+
+/* Form styling */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    border: 1px solid #cccccc;
+    font-family: "Parkinsans", sans-serif;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.input-field::placeholder {
+    font-family: "Parkinsans", sans-serif;
+    line-height: 1.5;
+    font-size: 17px;
+    color: #999;
+}
+
+/* Button styling */
+.button {
+    background-color: #0d9348;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #037835;
+}
+
+/* Link styling */
+.link {
+    color: #00897b;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
