@@ -20,6 +20,7 @@
   
   .seat-plan {
     display: flex;
+    padding-bottom: 5vh;
     flex-direction: column;
     align-items: center;
   }
@@ -78,6 +79,8 @@
   .selected-seats-summary {
     width: 30%;
     padding: 20px;
+    top: 16vh;
+    position: sticky;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -144,7 +147,9 @@
 
   /* ----------- */
   .seat-allocation-guide{
-    margin-top: 30vh;
+    position: sticky;
+    top: 27vh;
+    margin-top: 15vh;
   }
 
  .seat-allocation-guide span{

@@ -116,18 +116,18 @@ const SeatSelectionPage = () => {
               return (
                 <tr key={seatId}>
                   <td>{seat.seatNumber}</td>
-                  <td>{pricePerSeat} USD</td>
+                  <td>{pricePerSeat} $</td>
                 </tr>
               );
             })}
             <tr className="selected-seat-table-subtotal">
               <td><b>Sub total</b></td>
-              <td><b>{totalPrice} USD</b></td>
+              <td><b>{totalPrice} $</b></td>
             </tr>
           </tbody>
         </table>
         <button className="continue-button" onClick={handleBooking}>
-          Continue
+          Book Now
         </button>
       </div>
 
