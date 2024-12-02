@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+.HeaderContainer{
+    font-family: "Parkinsans", sans-serif;
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: white;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.logoContainer img{
+    width: 40px;
+    height: 40px;
+}
+
+.navigationContainer a{
+    color: #484848;
+    margin: 20px;
+    text-decoration: none;
+    transition: 0.4s border;
+  border-bottom: 0.1em solid transparent;
+}
+
+.navigationContainer a:hover{
+    border-color: currentColor;
+    color: #212121;
+}
+
+.loginRegister a{
+    display: inline;
+    font-size: 20px;
+    margin: 20px;
+    width:50px;
+    background-color: #0d9348;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}

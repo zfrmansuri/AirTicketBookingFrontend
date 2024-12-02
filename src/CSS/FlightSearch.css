@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.flightSearchContainer {
+  background-image: url("../Images/main-bg.png");
+  width: 100vw;
+  height: 80vh;
+  color: #bc1a1a;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.flightSearchContainer-leftHeading{
+  margin-left: 10vw;
+    font-size: 50px;
+    color: #424248;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    letter-spacing: -2px
+}
+
+.flightSearchContainer form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 40vw;
+  height: 35vh;
+  margin-right: 3vw;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 8px;
+}
+
+.destinationInput, .originInput{
+   border: 1px solid #999;
+  border-radius: 5px;
+  height: 40px;
+  padding: 20px 30px;
+  width: 250px;
+}
+
+.flightSearchContainer form input::placeholder {
+  font-family: "Parkinsans", sans-serif;
+  vertical-align: middle;
+  line-height: 1.5;
+  font-size: 17px;
+  padding: 10px;
+  color: #999;
+}
+
+.flightSearchContainer form input{
+  font-family: "Parkinsans", sans-serif;
+
+  font-size: 17px;
+  
+  /* Color Property */
+  color: #393838;
+}
+
+.originDestinationContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+}
+
+.originInput, .destinationInput {
+  width: 100%;
+  padding-left: 40px; /* Ensure space for the icon */
+  border: 1px solid #999;
+  border-radius: 5px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.dateContainer {
+  margin-top: 20px;
+}
+
+.dateWrapper {
+  position: relative;
+}
+
+.DatePicker {
+  border: 1px solid #999;
+  border-radius: 5px;
+  height: 40px;
+  padding-left: 37px;
+  width: 31vw;
+}
+.calendarIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.SearchButton{
+  margin-top: 20px;
+  border: none;
+  color: white;
+  background-color: #0d9348;
+  padding: 6px 18px;
+  font-family: "Parkinsans", sans-serif;
+  font-size: 18px;
+  border-radius: 7px;
+  transition: 0.2s ease-in;
+}
+
+.SearchButton:hover{
+  background-color: #0a6e35;
+}
