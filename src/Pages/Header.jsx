@@ -41,8 +41,8 @@ const Header = () => {
             <button onClick={handleLogout}>Logout</button>  // Show Logout button if authenticated
           ) : (
             <>
-              <Link to="/login">Login</Link>  
-              <Link to="/register">Register</Link>  
+              <Link to="/login">Login / Register</Link>  
+              {/* <Link to="/register">Register</Link>   */}
             </>
           )}
         </div>
