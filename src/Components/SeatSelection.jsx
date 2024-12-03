@@ -133,7 +133,7 @@ const SeatSelectionPage = () => {
 
       {/* Right Side - Seat Plan */}
       <div className="seat-plan">
-        <div className="door">Front</div>
+        <div className="front">Front</div>
         {groupedSeats.map((seatRow, index) => (
           <div key={index} className="seat-row">
             {seatRow.map((seat) => (
