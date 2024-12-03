@@ -1,41 +1,41 @@
 /* General Styles */
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-  }
+  } */
   
   /* User Dashboard Container */
-  .user-dashboard-container {
+  /* .user-dashboard-container {
     display: flex;
     position: relative;
     transition: margin-left 0.3s ease;
-  }
+  } */
   
   /* Hamburger Menu */
-  .hamburger-menu {
+  /* .hamburger-menu {
     position: fixed;
     top: 20px;
     left: 20px;
     cursor: pointer;
     z-index: 1000;
-  }
+  } */
   
-  .hamburger-menu .bar {
+  /* .hamburger-menu .bar {
     display: block;
     width: 30px;
     height: 4px;
     background-color: #333;
     margin: 5px 0;
     transition: all 0.3s ease;
-  }
+  } */
   
   /* Sidebar Styles */
-  .sidebar {
+  /* .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Initially hidden */
+    left: -250px; 
     width: 250px;
     height: 100%;
     background-color: #007bff;
@@ -43,28 +43,28 @@ body {
     padding-top: 20px;
     transition: left 0.3s ease;
     z-index: 999;
-  }
+  } */
   
-  .sidebar.open {
-    left: 0; /* Sidebar slides in when open */
-  }
+  /* .sidebar.open {
+    left: 0; 
+  } */
   
-  .sidebar h2 {
+  /* .sidebar h2 {
     text-align: center;
     font-size: 20px;
     color: #ffffff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 10px;
     margin-bottom: 20px;
-  }
+  } */
   
-  .sidebar ul {
+  /* .sidebar ul {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+  } */
   
-  .sidebar ul li {
+  /* .sidebar ul li {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -72,39 +72,39 @@ body {
     border-radius: 4px;
     margin: 5px 0;
     transition: background-color 0.3s ease;
-  }
+  } */
   
-  .sidebar ul li a {
+  /* .sidebar ul li a {
     text-decoration: none;
     color: white;
   }
-  
-  .sidebar ul li:hover {
+   */
+  /* .sidebar ul li:hover {
     background-color: #0056b3;
-  }
+  } */
   
   /* Main Content Styles */
-  .main-content {
+  /* .main-content {
     margin-left: 0;
     padding: 20px;
     flex-grow: 1;
     transition: margin-left 0.3s ease;
-  }
+  } */
   
-  .user-dashboard-container.menu-open .main-content {
+  /* .user-dashboard-container.menu-open .main-content {
     margin-left: 250px; /* Shift the content when sidebar is open */
-  }
+  } */
   
   /* Success and Error Message Styles */
-  .success-message,
+  /* .success-message,
   .error-message {
     margin-top: 10px;
     padding: 10px;
     font-weight: bold;
     text-align: center;
-  }
+  } */
   
-  .success-message {
+  /* .success-message {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
@@ -114,12 +114,12 @@ body {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
-  }
+  } */
   
   /* Responsive Design */
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     .sidebar {
-      width: 200px; /* Slightly smaller sidebar on mobile */
+      width: 200px; 
     }
   
     .hamburger-menu {
@@ -128,7 +128,7 @@ body {
     }
   
     .user-dashboard-container.menu-open .main-content {
-      margin-left: 200px; /* Adjust content margin for mobile */
+      margin-left: 200px; 
     }
-  }
+  } */
   

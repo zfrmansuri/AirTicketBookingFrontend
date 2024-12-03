@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
 
+/* google fonts */
 .HeaderContainer {
     font-family: "Parkinsans", sans-serif;
     display: flex;
@@ -14,6 +15,7 @@
 }
 
 .logoContainer img {
+    display: none;
     width: 40px;
     height: 40px;
 }

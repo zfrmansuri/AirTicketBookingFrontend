@@ -1,13 +1,17 @@
 .bookingsContainer {
     padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
+    /* background-color: #f9f9f9; */
+    /* min-height: 100vh; */
+    font-family: 'Parkinsans';
+    margin: 0 7vw
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333333;
+  font-size: 25px;
 }
 
 .bookingsTable {
@@ -28,9 +32,9 @@ h2 {
 }
 
 .bookingsTable th {
-    background-color: #007bff;
+    background-color: green;
+    font-weight: 500;
     color: white;
-    font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -107,17 +111,26 @@ h2 {
   }
   
   .popupContent h3 {
-    margin-top: 0;
-  }
+    margin-bottom: 20px;
+    font-weight: 600;
+    margin: 10px;
+    text-align: center;
+    font-size: 20px;
+    color: green;
+}
   
   .popupContent p {
     margin: 10px 0;
   }
+
+  .popupContent strong{
+    font-weight: 600;
+    }
   
   .closeButton {
     margin-top: 15px;
     padding: 10px 15px;
-    background: #007bff;
+    background: #cc0a0a;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -125,7 +138,7 @@ h2 {
   }
   
   .closeButton:hover {
-    background: #0056b3;
+    background: #9e0303;
   }
   
   .cancelButton {
