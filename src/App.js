@@ -1,20 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; // Correct import for jwtDecode
+import {jwtDecode} from "jwt-decode";  // Correct import for jwtDecode
 import FlightSearch from "./Components/FlightSearch";
 import FlightListPage from "./Pages/FlightListPage";
 import SeatSelectionPage from "./Components/SeatSelection";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Header from "./Pages/Header";
-import Footer from "./Components/Footer"
+import Footer from "./Components/Footer";
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
 import FlightOwnerDashboard from "./Pages/FlightOwnerDashboard";
-import Users from "./Components/Users";  // Assuming Users page exists
-import BookingHistory from "./Components/BookingHistory";  // Assuming BookingHistory page exists
-import Bookings from "./Components/Bookings";  // Assuming Bookings page exists
-import RegisterFlightOwner from "./Components/RegisterFlightOwner"; // Import the new Register Flight Owner component
+import Users from "./Components/Users";  
+import BookingHistory from "./Components/BookingHistory";  
+import Bookings from "./Components/Bookings";  
+import RegisterFlightOwner from "./Components/RegisterFlightOwner"; 
+import AddNewFlight from "./Components/AddNewFlight";
 import "./App.css";
 
 // Function to check if the user is authenticated and has a valid token
@@ -22,7 +23,7 @@ const isAuthenticated = () => {
   const token = localStorage.getItem("token");
   if (!token) return false;
   try {
-    const decodedToken = jwtDecode(token);  // Correct usage of jwtDecode
+    const decodedToken = jwtDecode(token);
     return decodedToken.exp * 1000 > Date.now(); // Check if token is expired
   } catch (error) {
     return false;
@@ -34,7 +35,7 @@ const getUserRole = () => {
   const token = localStorage.getItem("token");
   if (!token) return null;
   try {
-    const decodedToken = jwtDecode(token);  // Correct usage of jwtDecode
+    const decodedToken = jwtDecode(token);
     return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Example for Microsoft Identity
   } catch (error) {
     return null;
@@ -81,7 +82,7 @@ function App() {
           <Route path="users" element={<Users />} />
           <Route path="booking-history" element={<BookingHistory />} />
           <Route path="bookings" element={<Bookings />} />
-          <Route path="register-flight-owner" element={<RegisterFlightOwner />} /> {/* New route for Register Flight Owner */}
+          <Route path="register-flight-owner" element={<RegisterFlightOwner />} />
         </Route>
 
         <Route
@@ -95,11 +96,10 @@ function App() {
           {/* Nested Routes for User Dashboard */}
           <Route path="flight-search" element={<FlightSearch />} />
           <Route path="booking-history" element={<BookingHistory />} />
-          {/* Add any user-specific routes here */}
         </Route>
 
         <Route
-          path="/flightowner-dashboard"
+          path="/flightowner-dashboard/*"
           element={
             <ProtectedRoute roleRequired="FlightOwner">
               <FlightOwnerDashboard />
@@ -107,10 +107,16 @@ function App() {
           }
         >
           {/* Nested Routes for FlightOwner Dashboard */}
-          {/* Add any flight owner specific routes here */}
+          <Route path="flight-search" element={<FlightSearch />} />
+          <Route path="booking-history" element={<BookingHistory />} />
+          <Route path="bookings" element={<Bookings />} />
+          <Route path="add-new-flight" element={<AddNewFlight />} /> {/* Example route for Flight Owner */}
         </Route>
+
+        {/* Catch-all route for unauthenticated users or other access */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }

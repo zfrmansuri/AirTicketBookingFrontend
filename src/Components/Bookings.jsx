@@ -24,11 +24,14 @@ const Bookings = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(`https://localhost:7136/api/Booking/CancelBooking?booking_Id=${bookingId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.delete(
+        `https://localhost:7136/api/Booking/CancelBooking?booking_Id=${bookingId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
         alert("Booking canceled successfully.");
@@ -63,7 +66,7 @@ const Bookings = () => {
         if (data && data.$values) {
           setBookings(data.$values);
         } else {
-          setError("Unexpected response format.");
+          setError("No bookings found.");
         }
       } catch (err) {
         setError("Failed to fetch bookings.");
@@ -122,7 +125,7 @@ const Bookings = () => {
           </tbody>
         </table>
       ) : (
-        <p>No bookings available.</p>
+        <p>No data available. You have no bookings at this time.</p>
       )}
 
       {isPopupVisible && selectedBooking && (
