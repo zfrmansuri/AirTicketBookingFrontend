@@ -7,6 +7,7 @@ import SeatSelectionPage from "./Components/SeatSelection";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Header from "./Pages/Header";
+import Footer from "./Components/Footer"
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
 import FlightOwnerDashboard from "./Pages/FlightOwnerDashboard";
@@ -107,6 +108,7 @@ function App() {
           {/* Add any flight owner specific routes here */}
         </Route>
       </Routes>
+      <Footer/>
     </Router>
   );
 }
