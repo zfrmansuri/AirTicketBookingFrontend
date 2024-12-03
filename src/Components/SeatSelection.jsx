@@ -8,7 +8,7 @@ const SeatSelectionPage = () => {
   const { flightId } = useParams();
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [pricePerSeat, setPricePerSeat] = useState(50); // Assume seat price is 50 USD
+  const [pricePerSeat, setPricePerSeat] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -57,20 +57,20 @@ const SeatSelectionPage = () => {
   // };
 
   // Group seats into rows with 4 columns
-  
+
   const handleBooking = async () => {
     const payload = {
       flightId: Number(flightId),
       numberOfSeats: selectedSeats.length,
     };
-  
+
     const token = localStorage.getItem("token"); // Assuming the token is stored in localStorage
-  
+
     if (!token) {
       alert("You must be logged in to book tickets.");
       return;
     }
-  
+
     try {
       const response = await axios.post(
         "https://localhost:7136/api/Booking/BookTicket",
@@ -89,8 +89,8 @@ const SeatSelectionPage = () => {
       alert(error.response?.data?.message || "Booking Failed. Please try again.");
     }
   };
-  
-  
+
+
   const groupedSeats = [];
   for (let i = 0; i < seats.length; i += 4) {
     groupedSeats.push(seats.slice(i, i + 4));
@@ -133,15 +133,14 @@ const SeatSelectionPage = () => {
 
       {/* Right Side - Seat Plan */}
       <div className="seat-plan">
-        <div className="door">Front</div>
+        <div className="front">Front</div>
         {groupedSeats.map((seatRow, index) => (
           <div key={index} className="seat-row">
             {seatRow.map((seat) => (
               <div
                 key={seat.flightSeatId}
-                className={`seat ${
-                  !seat.isAvailable ? "booked" : selectedSeats.includes(seat.flightSeatId) ? "selected" : "available"
-                }`}
+                className={`seat ${!seat.isAvailable ? "booked" : selectedSeats.includes(seat.flightSeatId) ? "selected" : "available"
+                  }`}
                 onClick={() => seat.isAvailable && handleSeatClick(seat.flightSeatId)}
               >
                 {seat.seatNumber}

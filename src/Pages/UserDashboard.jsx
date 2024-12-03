@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import '../CSS/UserDashboard.css';
+import '../CSS/AdminDashboard.css';
 import FlightSearch from '../Components/FlightSearch';
 import BookingHistory from '../Components/BookingHistory';
 
