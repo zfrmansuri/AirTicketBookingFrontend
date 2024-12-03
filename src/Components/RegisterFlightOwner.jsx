@@ -1,6 +1,15 @@
-// src/Components/RegisterFlightOwner.js
 import React, { useState } from 'react';
 import axios from 'axios'; // Import Axios for API requests
+
+// Success modal component
+const SuccessModal = ({ message, onClose }) => (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h2>{message}</h2>
+      <button onClick={onClose}>Close</button>
+    </div>
+  </div>
+);
 
 const RegisterFlightOwner = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +24,7 @@ const RegisterFlightOwner = () => {
 
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // State to control modal visibility
 
   // Handle input field changes
   const handleChange = (e) => {
@@ -36,7 +46,7 @@ const RegisterFlightOwner = () => {
 
     try {
       const response = await axios.post(
-        'https://your-api-url/api/Authentication/RegisterFlightOwner', 
+        'https://localhost:7136/api/Authentication/RegisterFlightOwner', 
         formData, 
         {
           headers: {
@@ -47,7 +57,7 @@ const RegisterFlightOwner = () => {
       );
 
       setMessage(response.data.Message);
-      setError('');
+      setError(''); // Clear error if registration is successful
       setFormData({
         userName: '',
         email: '',
@@ -57,10 +67,17 @@ const RegisterFlightOwner = () => {
         password: '',
         confirmPassword: ''
       }); // Clear the form after successful submission
+
+      // Show the success modal after registration
+      setShowSuccessModal(true);
     } catch (err) {
       setMessage('');
       setError('Error registering flight owner. Please try again.');
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false); // Close the modal when the close button is clicked
   };
 
   return (
@@ -168,6 +185,11 @@ const RegisterFlightOwner = () => {
         {/* Submit Button */}
         <button type="submit">Register Flight Owner</button>
       </form>
+
+      {/* Show the success modal if registration is successful */}
+      {showSuccessModal && (
+        <SuccessModal message="Registration successful!" onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
