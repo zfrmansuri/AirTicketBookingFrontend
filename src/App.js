@@ -69,7 +69,7 @@ function App() {
 
         {/* Protected Routes */}
         <Route
-          path="/admin-dashboard"
+          path="/admin-dashboard/*"
           element={
             <ProtectedRoute roleRequired="Admin">
               <AdminDashboard />
@@ -85,7 +85,7 @@ function App() {
         </Route>
 
         <Route
-          path="/user-dashboard"
+          path="/user-dashboard/*"
           element={
             <ProtectedRoute roleRequired="User">
               <UserDashboard />
@@ -93,6 +93,8 @@ function App() {
           }
         >
           {/* Nested Routes for User Dashboard */}
+          <Route path="flight-search" element={<FlightSearch />} />
+          <Route path="booking-history" element={<BookingHistory />} />
           {/* Add any user-specific routes here */}
         </Route>
 
