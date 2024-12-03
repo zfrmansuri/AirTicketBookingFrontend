@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom'; // Import Link for navigation
-import '../CSS/FlightOwnerDashboard.css'; // Your CSS file for layout
 import FlightSearch from '../Components/FlightSearch'; // Flight Search Component
 import BookingHistory from '../Components/BookingHistory'; // Booking History Component
 import Bookings from '../Components/Bookings'; // Bookings Component
