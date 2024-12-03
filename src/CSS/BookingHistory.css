@@ -1,52 +1,58 @@
-/* BookingHistory.css */
-.booking-history-container {
+/* Main container for the booking history page */
+.bookingHistoryContainer {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f5f7fa;
     min-height: 100vh;
+    font-family: "Arial", sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
   }
   
-  .booking-history-header {
-    font-size: 24px;
+  .bookingHistoryContainer h2 {
+    font-size: 28px;
     margin-bottom: 20px;
     font-weight: bold;
-  }
-  
-  .booking-history-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .booking-history-table th,
-  .booking-history-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-  }
-  
-  .booking-history-table th {
-    background-color: #f4f4f4;
     color: #333;
   }
   
-  .booking-history-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+  /* Grid layout for booking cards */
+  .bookingCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
   }
   
-  .booking-history-table tr:hover {
-    background-color: #f1f1f1;
+  /* Individual booking card styles */
+  .bookingCard {
+    background-color: #ffffff;
+    border: 1px solid #e1e5eb;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
   }
   
-  .booking-history-table td .view-details-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 5px;
+  .bookingCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
   
-  .booking-history-table td .view-details-button:hover {
-    background-color: #0056b3;
+  .bookingCard h3 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .bookingCard p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .bookingCard p strong {
+    color: #333;
   }
   

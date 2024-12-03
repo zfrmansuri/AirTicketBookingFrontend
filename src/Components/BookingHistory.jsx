@@ -8,7 +8,7 @@ const BookingHistory = () => {
 
   // Function to get the token from local storage
   const getToken = () => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token");
     return token;
   };
 
@@ -42,7 +42,13 @@ const BookingHistory = () => {
         }
 
         const data = await response.json();
-        setBookingHistory(data);
+
+        // Extract $values from the response
+        if (data && data.$values) {
+          setBookingHistory(data.$values);
+        } else {
+          setError("Unexpected response format.");
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -63,30 +69,19 @@ const BookingHistory = () => {
 
   return (
     <div className="bookingHistoryContainer">
-      <h2>Booking History</h2>
+      <h2>My Booking History</h2>
       {bookingHistory.length > 0 ? (
-        <table className="bookingHistoryTable">
-          <thead>
-            <tr>
-              <th>Booking ID</th>
-              <th>Customer</th>
-              <th>Flight</th>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookingHistory.map((booking) => (
-              <tr key={booking.id}>
-                <td>{booking.id}</td>
-                <td>{booking.customerName}</td>
-                <td>{booking.flightDetails}</td>
-                <td>{booking.date}</td>
-                <td>{booking.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="bookingCardsContainer">
+          {bookingHistory.map((booking) => (
+            <div className="bookingCard" key={booking.bookingId}>
+              <h3>Booking ID: {booking.bookingId}</h3>
+              <p><strong>Date:</strong> {new Date(booking.bookingDate).toLocaleDateString()}</p>
+              <p><strong>Seats:</strong> {booking.numberOfSeats}</p>
+              <p><strong>Total Price:</strong> ₹{booking.totalPrice}</p>
+              <p><strong>Status:</strong> {booking.status}</p>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No bookings found.</p>
       )}
