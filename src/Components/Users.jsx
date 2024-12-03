@@ -86,24 +86,33 @@ const Users = () => {
             <th>Email</th>
             <th>Gender</th>
             <th>Address</th>
+            <th>Actions</th> {/* New column for actions */}
           </tr>
         </thead>
         <tbody>
           {users.length > 0 ? (
             users.map((user) => (
-              <tr key={user.id} onClick={() => setSelectedUser(user)}> {/* When a row is clicked, open the modal */}
+              <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.userName}</td>
                 <td>{user.email || "N/A"}</td>
                 <td>{user.gender || "N/A"}</td>
                 <td>{user.address || "N/A"}</td>
+                <td>
+                  <button
+                    className="editButton"
+                    onClick={() => setSelectedUser(user)} // When clicked, open modal for editing
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
             !loading &&
             !error && (
               <tr>
-                <td colSpan="5" className="noData">
+                <td colSpan="6" className="noData">
                   No users found for role: {selectedRole}
                 </td>
               </tr>
@@ -118,6 +127,7 @@ const Users = () => {
           user={selectedUser}
           onClose={handleCloseModal}
           onDelete={handleUserDelete}
+          setUsers={setUsers} // Pass setUsers to update the list after editing
         />
       )}
     </div>
