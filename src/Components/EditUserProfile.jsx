@@ -55,35 +55,46 @@ const EditUserProfile = ({ user, setUsers, onClose }) => {
 
   return (
     <form onSubmit={handleEdit} className="edit-form">
-      <label>Username:</label>
-      <input
-        type="text"
-        name="userName"
-        value={formData.userName}
-        onChange={handleChange}
-        required
-      />
-      <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <label>Gender:</label>
-      <input
-        type="text"
-        name="gender"
-        value={formData.gender}
-        onChange={handleChange}
-      />
-      <label>Address:</label>
-      <input
-        type="text"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-      />
+      <div className="edit-form-indiviual-field">
+        <label>Username :</label>
+        <input
+          type="text"
+          name="userName"
+          value={formData.userName}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="edit-form-indiviual-field">
+        <label>Email :</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="edit-form-indiviual-field">
+        <label>Gender :</label>
+        <input
+          type="text"
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="edit-form-indiviual-field">
+        <label>Address :</label>
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+        />
+      </div>
 
       {error && <p className="error">{error}</p>}
 

@@ -137,15 +137,15 @@ const BookingPopup = ({ booking, onClose }) => {
     <div className="popupOverlay">
       <div className="popupContent">
         <h3>Booking Details</h3>
-        <p><strong>Booking ID:</strong> {booking.bookingId}</p>
-        <p><strong>Customer Name:</strong> {booking.userName}</p>
-        <p><strong>Flight Number:</strong> {booking.flightNumber}</p>
-        <p><strong>Origin:</strong> {booking.origin}</p>
-        <p><strong>Destination:</strong> {booking.destination}</p>
-        <p><strong>Booking Date:</strong> {new Date(booking.bookingDate).toLocaleDateString()}</p>
-        <p><strong>Number of Seats:</strong> {booking.numberOfSeats}</p>
-        <p><strong>Total Price:</strong> ₹{booking.totalPrice}</p>
-        <p><strong>Status:</strong> {booking.status}</p>
+        <p><strong>Booking ID :</strong> {booking.bookingId}</p>
+        <p><strong>Customer Name :</strong> {booking.userName}</p>
+        <p><strong>Flight Number :</strong> {booking.flightNumber}</p>
+        <p><strong>Origin :</strong> {booking.origin}</p>
+        <p><strong>Destination :</strong> {booking.destination}</p>
+        <p><strong>Booking Date :</strong> {new Date(booking.bookingDate).toLocaleDateString()}</p>
+        <p><strong>Number of Seats :</strong> {booking.numberOfSeats}</p>
+        <p><strong>Total Price :</strong> ₹{booking.totalPrice}</p>
+        <p><strong>Status :</strong> {booking.status}</p>
         <button onClick={onClose} className="closeButton">Close</button>
       </div>
     </div>

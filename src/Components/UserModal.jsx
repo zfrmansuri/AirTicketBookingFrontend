@@ -38,10 +38,10 @@ const UserModal = ({ user, onClose, onDelete, setUsers }) => {
           <EditUserProfile user={user} setUsers={setUsers} onClose={onClose} />
         ) : (
           <>
-            <p><strong>Username:</strong> {user.userName}</p>
-            <p><strong>Email:</strong> {user.email || "N/A"}</p>
-            <p><strong>Gender:</strong> {user.gender || "N/A"}</p>
-            <p><strong>Address:</strong> {user.address || "N/A"}</p>
+            <p><strong>Username :</strong> {user.userName}</p>
+            <p><strong>Email :</strong> {user.email || "N/A"}</p>
+            <p><strong>Gender :</strong> {user.gender || "N/A"}</p>
+            <p><strong>Address :</strong> {user.address || "N/A"}</p>
 
             {error && <p className="error">{error}</p>}
 
