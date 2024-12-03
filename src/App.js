@@ -14,6 +14,7 @@ import FlightOwnerDashboard from "./Pages/FlightOwnerDashboard";
 import Users from "./Components/Users";  // Assuming Users page exists
 import BookingHistory from "./Components/BookingHistory";  // Assuming BookingHistory page exists
 import Bookings from "./Components/Bookings";  // Assuming Bookings page exists
+import RegisterFlightOwner from "./Components/RegisterFlightOwner"; // Import the new Register Flight Owner component
 import "./App.css";
 
 // Function to check if the user is authenticated and has a valid token
@@ -80,6 +81,7 @@ function App() {
           <Route path="users" element={<Users />} />
           <Route path="booking-history" element={<BookingHistory />} />
           <Route path="bookings" element={<Bookings />} />
+          <Route path="register-flight-owner" element={<RegisterFlightOwner />} /> {/* New route for Register Flight Owner */}
         </Route>
 
         <Route
