@@ -1,9 +1,9 @@
 .bookingsContainer {
-    padding: 20px;
-    /* background-color: #f9f9f9; */
-    /* min-height: 100vh; */
-    font-family: 'Parkinsans';
-    margin: 0 7vw
+  padding: 20px;
+  position: relative;
+  font-family: 'Parkinsans';
+  margin: 0 7vw;
+  top: 10vh;
 }
 
 h2 {

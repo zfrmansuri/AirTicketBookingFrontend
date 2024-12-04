@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom'; // Import Link for navigation
+import { Routes, Route, Link, useLocation } from 'react-router-dom'; // Import Link for navigation
 import FlightSearch from '../Components/FlightSearch'; // Flight Search Component
 import BookingHistory from '../Components/BookingHistory'; // Booking History Component
 import Bookings from '../Components/Bookings'; // Bookings Component
@@ -7,6 +7,10 @@ import AddNewFlight from '../Components/AddNewFlight'; // Add New Flight Compone
 
 const FlightOwnerDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  
+  // Exclude these paths from rendering the default FlightSearch
+  const excludePaths = ["/flights", "/seat-selection/"];
 
   // Toggle the menu state
   const toggleMenu = () => {
@@ -36,12 +40,15 @@ const FlightOwnerDashboard = () => {
       {/* Main Content Area */}
       <div className="main-content">
         <Routes>
+        {!excludePaths.some(path => location.pathname.startsWith(path)) && (
+            <Route path="/" element={<FlightSearch />} />
+          )}
           <Route path="/flight-search" element={<FlightSearch />} />
           <Route path="/booking-history" element={<BookingHistory />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/add-new-flight" element={<AddNewFlight />} /> {/* Add new flight page */}
 
-          <Route path="/" element={<FlightSearch />} /> {/* Default route */}
+          {/* <Route path="/" element={<FlightSearch />} />  */}
 
         </Routes>
       </div>

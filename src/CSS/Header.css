@@ -4,7 +4,9 @@
 .HeaderContainer {
     font-family: "Parkinsans", sans-serif;
     display: flex;
-    position: relative;
+    /* position: relative; */
+    position: fixed;
+    z-index: 50;
     width: 100%;
     justify-content: space-between;
     align-items: center;

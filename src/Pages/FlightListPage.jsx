@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode"; // For decoding the JWT
 import { searchFlights } from "../Api/flightAPI";
-import "../CSS/FlightListPage.css"
+import AdminDashboard from "./AdminDashboard";
+import FlightOwnerDashboard from "./FlightOwnerDashboard";
+import UserDashboard from "./UserDashboard";
+import "../CSS/FlightListPage.css";
 import arrowImg from "../Images/arrow.svg";
-import airplaneImg from "../Images/airplane.svg"
+import airplaneImg from "../Images/airplane.svg";
 
+// Helper function to get the user's role from the JWT
+const getUserRole = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Microsoft Identity role claim
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
+};
 
 const FlightListPage = () => {
   const navigate = useNavigate();
@@ -13,16 +29,17 @@ const FlightListPage = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dashboard, setDashboard] = useState(null);
 
   useEffect(() => {
+    // Fetch and set flights
     const fetchFlights = async () => {
       try {
-        console.log("another one", date);
+        console.log("Fetching flights for date:", date);
         const response = await searchFlights(origin, destination, date);
         console.log("Raw API response:", response);
 
-        // Extract the array from $values
-        const flightData = response?.data.$values || []; // Default to an empty array if $values is not present
+        const flightData = response?.data.$values || []; // Handle API response structure
         console.log("Extracted flight data:", flightData);
 
         setFlights(flightData);
@@ -35,8 +52,25 @@ const FlightListPage = () => {
     };
 
     fetchFlights();
-  }, [origin, destination, date]);
 
+    // Set the appropriate dashboard based on user role
+    const role = getUserRole();
+    if (role) {
+      switch (role) {
+        case "Admin":
+          setDashboard(<AdminDashboard />);
+          break;
+        case "FlightOwner":
+          setDashboard(<FlightOwnerDashboard />);
+          break;
+        case "User":
+          setDashboard(<UserDashboard />);
+          break;
+        default:
+          setDashboard(<p>Unauthorized Role</p>);
+      }
+    }
+  }, [origin, destination, date]);
 
   if (loading) return <p>Loading flights...</p>;
   if (error) return <p>{error}</p>;
@@ -49,29 +83,29 @@ const FlightListPage = () => {
       navigate("/login", { state: { from: `/seat-selection/${flightId}` } });
     } else {
       // Redirect to seat selection if authenticated
-      // navigate("/seat-selection");
       navigate(`/seat-selection/${flightId}`);
     }
   };
 
   return (
-    <div className="flightListWrapper">
-      {
-        flights.length > 0 ? (
+    <div>
+      {dashboard}
+      <div className="flightListWrapper">
+      {/* {dashboard} */}
+        {flights.length > 0 ? (
           <>
             {flights.map((flight) => (
-                        <div className="flightListItem">
-
+              <div className="flightListItem" key={flight.flightId}>
                 <div className="flightName">
                   <h3>Flight Id:</h3>
                   <div className="flightNameImg">
-                    <img src={airplaneImg} alt="img" style={{width:"15px"}} className="flightIdImg"/>
+                    <img src={airplaneImg} alt="img" style={{ width: "15px" }} className="flightIdImg" />
                     <p>{flight.flightNumber}</p>
                   </div>
                 </div>
                 <div className="flightOriginDestination">
                   <p>{flight.origin}</p>
-                  <img src={arrowImg} alt="img" className="flightIdImg"/>
+                  <img src={arrowImg} alt="img" className="flightIdImg" />
                   <p>{flight.destination}</p>
                 </div>
                 <div className="flightPriceBookSeatContainer">
@@ -84,12 +118,10 @@ const FlightListPage = () => {
           </>
         ) : (
           <p>No flights found matching the criteria.</p>
-        )
-      }
+        )}
+      </div>
     </div>
-
   );
 };
-
 
 export default FlightListPage;
