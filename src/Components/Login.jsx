@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import "../CSS/Login.css";
 
 const Login = () => {
@@ -75,18 +75,20 @@ const Login = () => {
             const decodedToken = jwtDecode(token);
             const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-            if (userRole === "Admin") {
-                // navigate("/admin-dashboard");
-                navigate(redirectTo)
-            } else if (userRole === "User") {
-                // navigate("/user-dashboard");
-                navigate(redirectTo)
-            } else if (userRole === "FlightOwner") {
-                // navigate("/flightowner-dashboard");
-                navigate(redirectTo)
+            if (redirectTo === "/") {
+                if (userRole === "Admin") {
+                    navigate("/admin-dashboard");
+                } else if (userRole === "User") {
+                    navigate("/user-dashboard");
+                } else if (userRole === "FlightOwner") {
+                    navigate("/flightowner-dashboard");
+                } else {
+                    console.error("Unknown user role");
+                }
             } else {
                 navigate(redirectTo);
             }
+
         } catch (err) {
             console.log(err)
             setError("Invalid login credentials.");

@@ -27,7 +27,7 @@ const FlightSearch = () => {
       console.log(error)
     }
   }, []);
-  
+
 
   const handleSearch = () => {
     const adjustedDate = date ? new Date(date) : null;

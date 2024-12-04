@@ -2,8 +2,10 @@
   padding: 20px;
   position: relative;
   font-family: 'Parkinsans';
-  margin: 0 7vw;
+  margin-left: 7vw;
   top: 10vh;
+  margin-right: 7vw;
+  margin-bottom: 20vh;
 }
 
 h2 {
