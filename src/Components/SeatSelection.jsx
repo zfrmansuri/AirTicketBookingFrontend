@@ -76,36 +76,41 @@ const SeatSelectionPage = () => {
   };
 
   const handleBooking = async () => {
-    const payload = {
-      flightId: Number(flightId),
-      seatIds: selectedSeats.map(
-        (seatId) => seats.find((s) => s.flightSeatId === seatId)?.seatNumber
-      ), // Map seat IDs to their seat numbers
-    };
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      alert("You must be logged in to book tickets.");
-      return;
+    if(selectedSeats.length <= 0){
+      alert("Please Select Atleast One Seat to Book!")
     }
-
-    try {
-      const response = await axios.post(
-        "https://localhost:7136/api/Booking/BookTicket",
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert("Booking Completed Successfully!");
-      console.log(response.data);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error booking tickets:", error);
-      alert(error.response?.data?.message || "Booking Failed. Please try again.");
+    else{
+      const payload = {
+        flightId: Number(flightId),
+        seatIds: selectedSeats.map(
+          (seatId) => seats.find((s) => s.flightSeatId === seatId)?.seatNumber
+        ), // Map seat IDs to their seat numbers
+      };
+  
+      const token = localStorage.getItem("token");
+  
+      if (!token) {
+        alert("You must be logged in to book tickets.");
+        return;
+      }
+  
+      try {
+        const response = await axios.post(
+          "https://localhost:7136/api/Booking/BookTicket",
+          payload,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        alert("Booking Completed Successfully!");
+        console.log(response.data);
+        window.location.reload();
+      } catch (error) {
+        console.error("Error booking tickets:", error);
+        alert(error.response?.data?.message || "Booking Failed. Please try again.");
+      }
     }
   };
 
