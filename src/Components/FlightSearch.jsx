@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../CSS/FlightSearch.css";
 import originImg from "../Images/Origin.svg"; // Path to origin icon
-import destinationImg from "../Images/Destination.svg"; 
+import destinationImg from "../Images/Destination.svg";
 import DateImg from "../Images/Date.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import styles
@@ -19,7 +19,7 @@ const FlightSearch = () => {
       adjustedDate.setDate(adjustedDate.getDate() + 1); // Increment the date by 1
     }
 
-    navigate("/flights", {
+    navigate("/flights", {    //navigating to select seat page
       state: {
         origin,
         destination,
@@ -57,7 +57,7 @@ const FlightSearch = () => {
         <div className="dateContainer">
           <div className="dateWrapper">
             <DatePicker
-              className="DatePicker" 
+              className="DatePicker"
               selected={date}
               onChange={(date) => setDate(date)} // DatePicker returns a Date object
               placeholderText="Select date" // Custom placeholder

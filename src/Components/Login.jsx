@@ -85,6 +85,7 @@ const Login = () => {
                 navigate(redirectTo);
             }
         } catch (err) {
+            console.log(err)
             setError("Invalid login credentials.");
         }
     };
