@@ -4,6 +4,7 @@ import FlightSearch from '../Components/FlightSearch'; // Flight Search Componen
 import BookingHistory from '../Components/BookingHistory'; // Booking History Component
 import Bookings from '../Components/Bookings'; // Bookings Component
 import AddNewFlight from '../Components/AddNewFlight'; // Add New Flight Component (You can create this component)
+import GetAllFlights from '../Components/GetAllFlights';
 
 const FlightOwnerDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ const FlightOwnerDashboard = () => {
           <li><Link to="/flightowner-dashboard/booking-history">My Booking History</Link></li>
           <li><Link to="/flightowner-dashboard/bookings">All Bookings</Link></li>
           <li><Link to="/flightowner-dashboard/add-new-flight">Add New Flight</Link></li>
+          <li><Link to="/flightowner-dashboard/get-all-flights">All Flights</Link></li> {/* New Link */}
         </ul>
       </div>
 
@@ -40,6 +42,7 @@ const FlightOwnerDashboard = () => {
           <Route path="/booking-history" element={<BookingHistory />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/add-new-flight" element={<AddNewFlight />} /> {/* Add new flight page */}
+          <Route path="/get-all-flights" element={<GetAllFlights />} /> {/* New Route */}
 
           <Route path="/" element={<FlightSearch />} /> {/* Default route */}
 
