@@ -12,48 +12,88 @@ const FlightSearch = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState(null);
-  const [error, setError] = useState("");
   const [userName, setUserName] = useState("");
+  const [flights, setFlights] = useState([]);
+  const [origins, setOrigins] = useState([]);
+  const [filteredDestinations, setFilteredDestinations] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
-        let decodedToken = jwtDecode(token);
-        decodedToken =
-          decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-        setUserName(decodedToken);
+        const decodedToken = jwtDecode(token);
+        const name = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+        setUserName(name);
       }
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  const validateInput = () => {
-    if (!origin.trim()) {
-      setError("Origin is required.");
-      return false;
+  // useEffect(() => {
+  //   const fetchFlights = async () => {
+  //     try {
+  //       const response = await fetch("https://localhost:7136/api/Flight/GetAllFlightsForEveryone");
+  //       const data = await response.json();
+  //       if (data && data.$values) {
+  //         setFlights(data.$values);
+
+  //         const uniqueOrigins = [...new Set(data.$values.map((flight) => flight.origin))];
+  //         setOrigins(uniqueOrigins);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching flights:", error);
+  //     }
+  //   };
+
+  //   fetchFlights();
+  // }, []);
+
+
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const response = await fetch("https://localhost:7136/api/Flight/GetAllFlightsForEveryone");
+        const data = await response.json();
+  
+        if (data && data.$values) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0); // Set time to start of the day
+  
+          // Filter flights for today and future
+          const validFlights = data.$values.filter((flight) => {
+            const flightDate = new Date(flight.departureDate); // Assuming `departureDate` holds the flight date
+            return flightDate >= today; // Include only today and future dates
+          });
+  
+          setFlights(validFlights);
+  
+          // Extract unique origins
+          const uniqueOrigins = [...new Set(validFlights.map((flight) => flight.origin))];
+          setOrigins(uniqueOrigins);
+        }
+      } catch (error) {
+        console.error("Error fetching flights:", error);
+      }
+    };
+  
+    fetchFlights();
+  }, []);
+  
+
+
+  useEffect(() => {
+    if (origin) {
+      const destinations = flights
+        .filter((flight) => flight.origin === origin)
+        .map((flight) => flight.destination);
+      setFilteredDestinations([...new Set(destinations)]);
+    } else {
+      setFilteredDestinations([]);
     }
-    if (!destination.trim()) {
-      setError("Destination is required.");
-      return false;
-    }
-    if (origin.trim().toLowerCase() === destination.trim().toLowerCase()) {
-      setError("Origin and destination cannot be the same.");
-      return false;
-    }
-    if (!date) {
-      setError("Please select a travel date.");
-      return false;
-    }
-    if (new Date(date) <= new Date()) {
-      setError("Travel date must be in the future.");
-      return false;
-    }
-    setError(""); // Clear any previous errors
-    return true;
-  };
+  }, [origin, flights]);
 
   const handleSearch = () => {
     if (!validateInput()) {
@@ -73,6 +113,8 @@ const FlightSearch = () => {
       },
     });
   };
+
+  const isFormValid = origin && destination && date; // Ensure all fields are filled
 
   return (
     <div className="flightSearchContainer">
@@ -94,25 +136,34 @@ const FlightSearch = () => {
         <div className="originDestinationContainer">
           <div className="inputWrapper">
             <img src={originImg} alt="Origin Icon" className="inputIcon" />
-            <input
-              type="text"
+            <select
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
-              placeholder="Origin"
-              className={`originInput ${error.includes("Origin") ? "invalid-input" : ""}`}
-            />
+              className="originInput"
+            >
+              <option value="">Select Origin</option>
+              {origins.map((origin, index) => (
+                <option key={index} value={origin}>
+                  {origin}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="inputWrapper">
             <img src={destinationImg} alt="Destination Icon" className="inputIcon" />
-            <input
-              type="text"
+            <select
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              placeholder="Destination"
-              className={`destinationInput ${
-                error.includes("Destination") ? "invalid-input" : ""
-              }`}
-            />
+              className="destinationInput"
+              disabled={!origin}
+            >
+              <option value="">Select Destination</option>
+              {filteredDestinations.map((destination, index) => (
+                <option key={index} value={destination}>
+                  {destination}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className="dateContainer">
@@ -123,13 +174,17 @@ const FlightSearch = () => {
               onChange={(date) => setDate(date)}
               placeholderText="Select date"
               dateFormat="yyyy-MM-dd"
-              minDate={new Date()} // Prevent past dates from being selected
+              minDate={new Date()} // Set minimum selectable date to today
             />
             <img src={DateImg} alt="Calendar Icon" className="calendarIcon" />
           </div>
         </div>
-        {error && <p className="error-message">{error}</p>}
-        <button type="button" onClick={handleSearch} className="SearchButton">
+        <button
+          type="button"
+          onClick={handleSearch}
+          className="SearchButton"
+          disabled={!isFormValid} // Disable button if form is incomplete
+        >
           Search Flights
         </button>
       </form>

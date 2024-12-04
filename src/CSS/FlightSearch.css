@@ -6,136 +6,135 @@
     height: 84vh;
     position: relative;
     top: 8vh;
-    /* color: #bc1a1a; */
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 40px;
+    padding: 0 5vw;
+    box-sizing: border-box;
 }
 
-.flightSearchContainer-leftHeading{
-    margin-left: 10vw;
+.flightSearchContainer-leftHeading {
     font-size: 50px;
     color: #535355;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     text-align: left;
-    letter-spacing: -2px
+    letter-spacing: -2px;
 }
 
-.flightSearchContainer-leftHeading span{
-  color: #088c42;
+.flightSearchContainer-leftHeading span {
+    color: #088c42;
 }
 
 .flightSearchContainer form {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  /* width: 40vw; */
-  padding: 10px 55px;
-  height: 35vh;
-  margin-right: 3vw;
+  width: 37rem;
+  padding: 39px;
   border-radius: 10px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-sizing: border-box;
 }
 
-.destinationInput, .originInput{
-   border: 1px solid #999;
-  border-radius: 5px;
-  height: 40px;
-  padding: 20px 30px;
-  width: 250px;
+.destinationInput, .originInput, .DatePicker {
+    font-family: "Parkinsans", sans-serif;
+    font-size: 16px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    height: 40px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    color: #393838;
 }
 
+.flightSearchContainer form select::placeholder,
 .flightSearchContainer form input::placeholder {
-  font-family: "Parkinsans", sans-serif;
-  vertical-align: middle;
-  line-height: 1.5;
-  font-size: 17px;
-  padding: 10px;
-  color: #999;
-}
-
-.flightSearchContainer form input{
-  font-family: "Parkinsans", sans-serif;
-
-  font-size: 17px;
-  
-  /* Color Property */
-  color: #393838;
+    font-family: "Parkinsans", sans-serif;
+    font-size: 16px;
+    color: #999;
 }
 
 .originDestinationContainer {
   display: flex;
   flex-direction: row;
-  gap: 25px;
+  gap: 20px;
+  width: 32rem;
 }
 
 .inputWrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .inputIcon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px; /* Adjust size as needed */
-  height: 20px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
 }
 
-.originInput, .destinationInput {
-  width: 100%;
-  padding-left: 40px; /* Ensure space for the icon */
-  border: 1px solid #999;
-  border-radius: 5px;
-  height: 30px;
-  box-sizing: border-box;
+.originInput, .destinationInput, .DatePicker {
+    padding-left: 40px;
 }
 
 .dateContainer {
-  margin-top: 20px;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .dateWrapper {
-  position: relative;
+    position: relative;
+    width: 100%;
 }
 
 .DatePicker {
   border: 1px solid #999;
   border-radius: 5px;
   height: 40px;
-  padding-left: 37px;
-  width: 31vw;
+  padding-left: 40px;
+  width: 32rem;
+  box-sizing: border-box;
 }
+
 .calendarIcon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
-.SearchButton{
-  margin-top: 20px;
-  border: none;
-  color: white;
-  background-color: #0d9348;
-  cursor: pointer;
-  padding: 6px 18px;
-  font-family: "Parkinsans", sans-serif;
-  font-size: 18px;
-  border-radius: 7px;
-  transition: 0.2s ease-in;
+.SearchButton {
+    margin-top: 20px;
+    border: none;
+    color: white;
+    background-color: #0d9348;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-family: "Parkinsans", sans-serif;
+    font-size: 18px;
+    border-radius: 7px;
+    transition: 0.2s ease-in;
+    width: 100%;
 }
 
-.SearchButton:hover{
-  background-color: #0a6e35;
+.SearchButton:hover {
+    background-color: #0a6e35;
+}
+
+.SearchButton:disabled {
+  background-color: #707271;
+  cursor: not-allowed;
 }

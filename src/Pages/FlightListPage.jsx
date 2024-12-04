@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"; // For decoding the JWT
+import { jwtDecode } from "jwt-decode"; // For decoding the JWT
 import { searchFlights } from "../Api/flightAPI";
 import AdminDashboard from "./AdminDashboard";
 import FlightOwnerDashboard from "./FlightOwnerDashboard";
@@ -73,7 +73,7 @@ const FlightListPage = () => {
   }, [origin, destination, date]);
 
   if (loading) return <p>Loading flights...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <div className="No-Matching-Flights-Error"><p>{error}</p></div>;
 
   const handleBookNow = (flightId) => {
     const token = localStorage.getItem("token");
@@ -91,7 +91,7 @@ const FlightListPage = () => {
     <div>
       {dashboard}
       <div className="flightListWrapper">
-      {/* {dashboard} */}
+        {/* {dashboard} */}
         {flights.length > 0 ? (
           <>
             {flights.map((flight) => (
@@ -117,7 +117,10 @@ const FlightListPage = () => {
             ))}
           </>
         ) : (
-          <p>No flights found matching the criteria.</p>
+          <>
+            <div className="No-Matching-Flights-Error"><div>No flights found the matching criteria.</div></div>
+          </>
+
         )}
       </div>
     </div>

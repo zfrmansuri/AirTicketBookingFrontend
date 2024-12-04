@@ -102,3 +102,22 @@
     width: 20px;
     height: 20px;
 }
+
+
+.No-Matching-Flights-Error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    font-size: 30px;
+}
+
+.No-Matching-Flights-Error p{
+    font-family: poppins;
+    font-size: 25px;
+    color: red;
+    background: #ffe1e7;
+    padding: 10px;
+    border-radius: 15px;
+}
