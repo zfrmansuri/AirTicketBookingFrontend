@@ -132,7 +132,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import {jwtDecode} from "jwt-decode"; // Correct import for jwtDecode
 import FlightSearch from "./Components/FlightSearch";
 import FlightListPage from "./Pages/FlightListPage";
-import SeatSelectionPage from "./Pages/SeatSelection";
+import SeatSelectionPage from "./Components/SeatSelection";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Header from "./Pages/Header";
@@ -193,10 +193,10 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<FlightSearch />} />
-        <Route path="/flights" element={<FlightListPage />} />
+        <Route path="/flights/*" element={<FlightListPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/seat-selection/:flightId" element={<SeatSelectionPage />} />
+        <Route path="/seat-selection/:flightId/*" element={<SeatSelectionPage />} />
 
         {/* Protected Routes */}
         <Route

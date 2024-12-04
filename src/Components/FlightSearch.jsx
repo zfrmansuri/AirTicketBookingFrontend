@@ -15,14 +15,16 @@ const FlightSearch = () => {
   const [userName, setUserName] = useState("")
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      let decodedToken = jwtDecode(token);
-      decodedToken = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-      setUserName(decodedToken);
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        let decodedToken = jwtDecode(token);
+        decodedToken = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+        setUserName(decodedToken);
+      }
+    } catch (error) {
+      console.log(error)
     }
   }, []);
   
