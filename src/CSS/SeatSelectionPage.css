@@ -69,12 +69,14 @@
 
 /* ------------------- */
 .seat-selection-container {
-    display: flex;
-    gap: 8vw;
-    padding: 25px;
-    justify-content: center;
-    align-items: start;
-  }
+  display: flex;
+  gap: 8vw;
+  padding: 25px;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  top: 7vh;
+}
   
   .selected-seats-summary {
     width: 30%;
@@ -86,6 +88,7 @@
     background-color: #f9f9f9;
     font-family: 'poppins';
     margin-top: 4vh;
+    margin-bottom: 6vh;
   }
   
   .selected-seats-summary h3 {

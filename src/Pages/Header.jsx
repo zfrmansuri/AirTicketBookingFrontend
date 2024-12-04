@@ -24,6 +24,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
     navigate("/"); // Redirect to home page after logout
+    window.location.reload();
   };
 
   return (

@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import '../CSS/AdminDashboard.css';
 import FlightSearch from '../Components/FlightSearch';
 import BookingHistory from '../Components/BookingHistory';
 
 const UserDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   // Toggle the menu state
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Exclude these paths from rendering the default FlightSearch
+  const excludePaths = ["/flights", "/seat-selection/"];
 
   return (
     <div className={`user-dashboard-container ${isMenuOpen ? 'menu-open' : ''}`}>
@@ -33,9 +37,12 @@ const UserDashboard = () => {
       {/* Main Content */}
       <div className="main-content">
         <Routes>
+        {!excludePaths.some(path => location.pathname.startsWith(path)) && (
+            <Route path="/" element={<FlightSearch />} />
+          )}
           <Route path="/flight-search" element={<FlightSearch />} />
           <Route path="/booking-history" element={<BookingHistory />} />
-          <Route path="/" element={<FlightSearch />} /> {/* Default Route */}
+          {/* <Route path="/" element={<FlightSearch />} />  */}
         </Routes>
       </div>
     </div>
