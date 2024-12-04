@@ -47,36 +47,39 @@ const Bookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       const token = localStorage.getItem("token");
-
+  
       if (!token) {
         setError("User not authorized. Please log in.");
         setLoading(false);
         return;
       }
-
+  
       try {
         const response = await axios.get("https://localhost:7136/api/Booking/ListAllBooking", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         const data = response.data;
-
-        if (data && data.$values) {
+  
+        if (data && data.$values && data.$values.length > 0) {
           setBookings(data.$values);
         } else {
-          setError("No bookings found.");
+          setError(data.message || "No bookings found."); // Use backend message or fallback
         }
       } catch (err) {
-        setError("Failed to fetch bookings.");
+        console.error("Failed to fetch bookings:", err);
+        const backendMessage = err.response?.data?.message || "An error occurred while fetching bookings."; // Fetch backend error message
+        setError(backendMessage); // Set backend error message
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchBookings();
   }, []);
+  
 
   if (loading) {
     return <div className="bookingsContainer">Loading...</div>;
