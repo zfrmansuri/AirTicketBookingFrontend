@@ -15,8 +15,6 @@ const FlightSearch = () => {
   const [userName, setUserName] = useState("")
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     try {
       const token = localStorage.getItem("token");
@@ -25,7 +23,9 @@ const FlightSearch = () => {
         decodedToken = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
         setUserName(decodedToken);
       }
-    } catch {}
+    } catch (error) {
+      console.log(error)
+    }
   }, []);
 
 
