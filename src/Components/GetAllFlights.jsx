@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../CSS/Users.css'; // Assuming the CSS file is named Users.css
 
 const GetAllFlights = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedFlight, setSelectedFlight] = useState(null); // Flight for the popup
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // State to control popup visibility
-  const [isEditMode, setIsEditMode] = useState(false); // State to toggle between view and edit modes
+  const [selectedFlight, setSelectedFlight] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     const fetchFlights = async () => {
       try {
         const response = await axios.get('https://localhost:7136/api/Flight/GetAllFlights', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         });
         setFlights(response.data.$values || []);
       } catch (err) {
@@ -32,8 +33,8 @@ const GetAllFlights = () => {
     try {
       const response = await axios.get(`https://localhost:7136/api/Flight/GetFlightDetails/${flightId}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       });
       setSelectedFlight(response.data);
       setIsPopupOpen(true);
@@ -46,8 +47,8 @@ const GetAllFlights = () => {
     try {
       await axios.delete(`https://localhost:7136/api/Flight/RemoveFlight/${flightId}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       });
       alert('Flight deleted successfully!');
       setFlights(flights.filter((flight) => flight.flightId !== flightId));
@@ -65,8 +66,8 @@ const GetAllFlights = () => {
         selectedFlight,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         }
       );
       alert('Flight updated successfully!');
@@ -95,17 +96,17 @@ const GetAllFlights = () => {
   };
 
   if (loading) {
-    return <div>Loading flights...</div>;
+    return <div className="loading-indicator">Loading flights...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   return (
-    <div>
+    <div className="usersContainer">
       <h2>All Flights</h2>
-      <table>
+      <table className="usersTable">
         <thead>
           <tr>
             <th>Flight Number</th>
@@ -118,7 +119,7 @@ const GetAllFlights = () => {
           </tr>
         </thead>
         <tbody>
-          {flights.map(flight => (
+          {flights.map((flight) => (
             <tr key={flight.flightId}>
               <td>{flight.flightNumber}</td>
               <td>{flight.origin}</td>
@@ -127,7 +128,10 @@ const GetAllFlights = () => {
               <td>{flight.availableSeats}</td>
               <td>{flight.pricePerSeat}</td>
               <td>
-                <button onClick={() => fetchFlightDetails(flight.flightId)} style={{ marginRight: '10px' }}>
+                <button
+                  className="editButton"
+                  onClick={() => fetchFlightDetails(flight.flightId)}
+                >
                   Details
                 </button>
               </td>
@@ -136,84 +140,123 @@ const GetAllFlights = () => {
         </tbody>
       </table>
 
-      {/* Popup Window */}
       {isPopupOpen && selectedFlight && (
-        <div className="popup">
-          <div className="popup-content">
+        <div className="modal-overlay">
+          <div className="modal-content">
             <h3>{isEditMode ? 'Edit Flight' : 'Flight Details'}</h3>
             {isEditMode ? (
               <div>
-                <label>
-                  Flight Number:
-                  <input
-                    name="flightNumber"
-                    value={selectedFlight.flightNumber}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <label>
-                  Origin:
-                  <input
-                    name="origin"
-                    value={selectedFlight.origin}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <label>
-                  Destination:
-                  <input
-                    name="destination"
-                    value={selectedFlight.destination}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <label>
-                  Departure Date:
-                  <input
-                    name="departureDate"
-                    type="datetime-local"
-                    value={new Date(selectedFlight.departureDate).toISOString().slice(0, -8)}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <label>
-                  Available Seats:
-                  <input
-                    name="availableSeats"
-                    type="number"
-                    value={selectedFlight.availableSeats}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <label>
-                  Price Per Seat:
-                  <input
-                    name="pricePerSeat"
-                    type="number"
-                    value={selectedFlight.pricePerSeat}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <button onClick={updateFlight} style={{ backgroundColor: 'green', color: 'white', marginRight: '10px' }}>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Flight Number:
+                    <input
+                      name="flightNumber"
+                      value={selectedFlight.flightNumber}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Origin:
+                    <input
+                      name="origin"
+                      value={selectedFlight.origin}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Destination:
+                    <input
+                      name="destination"
+                      value={selectedFlight.destination}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Departure Date:
+                    <input
+                      name="departureDate"
+                      type="datetime-local"
+                      value={new Date(selectedFlight.departureDate)
+                        .toISOString()
+                        .slice(0, -8)}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Available Seats:
+                    <input
+                      name="availableSeats"
+                      type="number"
+                      value={selectedFlight.availableSeats}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <div className="edit-form-indiviual-field">
+                  <label>
+                    Price Per Seat:
+                    <input
+                      name="pricePerSeat"
+                      type="number"
+                      value={selectedFlight.pricePerSeat}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </div>
+                <button className="editButton" onClick={updateFlight}>
                   Save
                 </button>
-                <button onClick={() => setIsEditMode(false)}>Cancel</button>
+                <button className="editButton" onClick={() => setIsEditMode(false)}>
+                  Cancel
+                </button>
               </div>
             ) : (
               <div>
-                <p><strong>Flight Number:</strong> {selectedFlight.flightNumber}</p>
-                <p><strong>Origin:</strong> {selectedFlight.origin}</p>
-                <p><strong>Destination:</strong> {selectedFlight.destination}</p>
-                <p><strong>Departure Date:</strong> {new Date(selectedFlight.departureDate).toLocaleString()}</p>
-                <p><strong>Seats Available:</strong> {selectedFlight.availableSeats}</p>
-                <p><strong>Price Per Seat:</strong> {selectedFlight.pricePerSeat}</p>
-                <button onClick={() => setIsEditMode(true)} style={{ marginRight: '10px' }}>Edit</button>
-                <button onClick={() => deleteFlight(selectedFlight.flightId)} style={{ backgroundColor: 'red', color: 'white' }}>
+                <p>
+                  <strong>Flight Number:</strong> {selectedFlight.flightNumber}
+                </p>
+                <p>
+                  <strong>Origin:</strong> {selectedFlight.origin}
+                </p>
+                <p>
+                  <strong>Destination:</strong> {selectedFlight.destination}
+                </p>
+                <p>
+                  <strong>Departure Date:</strong>{' '}
+                  {new Date(selectedFlight.departureDate).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Seats Available:</strong> {selectedFlight.availableSeats}
+                </p>
+                <p>
+                  <strong>Price Per Seat:</strong> {selectedFlight.pricePerSeat}
+                </p>
+                <button
+                  className="get-all-flights-editButton"
+                  onClick={() => setIsEditMode(true)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="editButton"
+                  style={{ backgroundColor: 'red', color: 'white' }}
+                  onClick={() => deleteFlight(selectedFlight.flightId)}
+                >
                   Delete
                 </button>
               </div>
             )}
-            <button onClick={closePopup} style={{ marginTop: '10px' }}>Close</button>
+            <button className="get-all-flights-close-btn" onClick={closePopup}>
+              Close
+            </button>
           </div>
         </div>
       )}
