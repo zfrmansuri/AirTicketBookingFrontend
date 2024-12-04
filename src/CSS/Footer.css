@@ -1,21 +1,9 @@
-/* .footer-container{
-    height: 8vh;
-    color: #0d9348;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Parkinsans", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    box-shadow: #0d9347 0 8px 20px;
-} */
-
 .footer-container{ 
     position: fixed;
     height: 8vh;
     bottom: 0;
     width: 100vw;
+    z-index: 500;
     color: #0d9348;
     background-color: white;
     display: flex;

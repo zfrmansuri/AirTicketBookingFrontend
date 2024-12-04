@@ -109,7 +109,7 @@ const FlightListPage = () => {
                   <p>{flight.destination}</p>
                 </div>
                 <div className="flightPriceBookSeatContainer">
-                  <h3>${flight.pricePerSeat}</h3>
+                  <h3>₹{flight.pricePerSeat}</h3>
                   <p>Seats: {flight.availableSeats}</p>
                   <button onClick={() => handleBookNow(flight.flightId)}>Select Seat</button>
                 </div>

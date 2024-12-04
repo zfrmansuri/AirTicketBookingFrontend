@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"; // For decoding the JWT
+import { jwtDecode } from "jwt-decode"; // For decoding the JWT
 import { getFlightDetails } from "../Api/flightAPI";
 import AdminDashboard from "../Pages/AdminDashboard";
 import FlightOwnerDashboard from "../Pages/FlightOwnerDashboard";
@@ -78,7 +78,9 @@ const SeatSelectionPage = () => {
   const handleBooking = async () => {
     const payload = {
       flightId: Number(flightId),
-      numberOfSeats: selectedSeats.length,
+      seatIds: selectedSeats.map(
+        (seatId) => seats.find((s) => s.flightSeatId === seatId)?.seatNumber
+      ), // Map seat IDs to their seat numbers
     };
 
     const token = localStorage.getItem("token");
@@ -117,7 +119,7 @@ const SeatSelectionPage = () => {
   return (
     <div>
       {dashboard}
-      
+
       <div className="seat-selection-container">
         {/* Left Side - Selected Seats Summary */}
         <div className="selected-seats-summary">

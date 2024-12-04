@@ -45,7 +45,7 @@
 }
 
 .add-flight-button {
-    background-color: #631363;
+    background-color: #056705;
     font-family: "Parkinsans", sans-serif;
     color: white;
     border: none;
@@ -59,7 +59,7 @@
 }
 
 .add-flight-button:hover {
-    background-color: #420c42;
+    background-color: #024b02;
 }
 
 .add-flight-error-message {
