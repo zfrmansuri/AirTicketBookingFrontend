@@ -1,0 +1,128 @@
+/* .getAllFlights-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .getAllFlights-header {
+    font-size: 24px;
+    color: #0d9348;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .getAllFlights-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .getAllFlights-table th, 
+  .getAllFlights-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .getAllFlights-table th {
+    background-color: #0d9348;
+    color: white;
+  }
+  
+  .getAllFlights-detailsButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .getAllFlights-popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .getAllFlights-popupContent {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .getAllFlights-saveButton,
+  .getAllFlights-cancelButton,
+  .getAllFlights-closeButton,
+  .getAllFlights-editButton,
+  .getAllFlights-deleteButton {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 4px;
+  }
+  
+  .getAllFlights-saveButton {
+    background-color: #0d9348;
+    color: white;
+  }
+  
+  .getAllFlights-cancelButton {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .getAllFlights-closeButton {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .getAllFlights-deleteButton {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .getAllFlights-error,
+  .getAllFlights-loading {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+   */
+
+   .get-all-flights-close-btn
+    {
+        background-color: white;
+        color: green;
+        border: 1px solid green;
+        font-family: 'Poppins';
+        font-size: 16px;
+        padding: 10px 24px;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+        width: 100%;
+        box-shadow: rgb(0 79 11 / 70%) 0px 0px 3px;
+    }
+   
+    .get-all-flights-editButton{
+        color: white;
+        background-color: green;
+    }
