@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
@@ -76,15 +76,19 @@ const Login = () => {
             const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
             if (userRole === "Admin") {
-                navigate("/admin-dashboard");
+                // navigate("/admin-dashboard");
+                navigate(redirectTo)
             } else if (userRole === "User") {
-                navigate("/user-dashboard");
+                // navigate("/user-dashboard");
+                navigate(redirectTo)
             } else if (userRole === "FlightOwner") {
-                navigate("/flightowner-dashboard");
+                // navigate("/flightowner-dashboard");
+                navigate(redirectTo)
             } else {
                 navigate(redirectTo);
             }
         } catch (err) {
+            console.log(err)
             setError("Invalid login credentials.");
         }
     };

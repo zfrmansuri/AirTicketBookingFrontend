@@ -17,6 +17,8 @@
     background-image: url(../Images/main-bg.png);
     background-size: cover;
     display: flex;
+    top: 8vh;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: 100%;

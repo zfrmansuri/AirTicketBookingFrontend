@@ -1,25 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .flightSearchContainer {
-  background-image: url("../Images/main-bg.png");
-  width: 100vw;
-  height: 84vh;
-  color: #bc1a1a;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
+    background-image: url("../Images/main-bg.png");
+    width: 100vw;
+    height: 84vh;
+    position: relative;
+    top: 8vh;
+    /* color: #bc1a1a; */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
 }
 
 .flightSearchContainer-leftHeading{
-  margin-left: 10vw;
+    margin-left: 10vw;
     font-size: 50px;
-    color: #424248;
+    color: #535355;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
+    text-align: left;
     letter-spacing: -2px
+}
+
+.flightSearchContainer-leftHeading span{
+  color: #088c42;
 }
 
 .flightSearchContainer form {
