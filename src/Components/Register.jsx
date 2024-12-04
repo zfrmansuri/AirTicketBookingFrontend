@@ -68,6 +68,7 @@ const Register = () => {
               className="input-field"
               value={formData.userName}
               onChange={handleChange}
+              required
             />
             <input
               type="email"
@@ -76,6 +77,7 @@ const Register = () => {
               className="input-field"
               value={formData.email}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="row">
@@ -86,12 +88,14 @@ const Register = () => {
               className="input-field"
               value={formData.phoneNumber}
               onChange={handleChange}
+              required
             />
             <select
               name="gender"
               className="input-field"
               value={formData.gender}
               onChange={handleChange}
+              required
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -107,6 +111,7 @@ const Register = () => {
               className="input-field full-width"
               value={formData.address}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="row">
@@ -117,6 +122,7 @@ const Register = () => {
               className="input-field"
               value={formData.password}
               onChange={handleChange}
+              required
             />
             <input
               type="password"
@@ -125,6 +131,7 @@ const Register = () => {
               className="input-field"
               value={formData.confirmPassword}
               onChange={handleChange}
+              required
             />
           </div>
           {/* {error && <p className="error-message">{error.map}</p>} */}
