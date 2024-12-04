@@ -33,7 +33,7 @@ const Header = () => {
         <div className="logoContainer">
           <img src={logo} alt="logo" />
         </div>
-        <div className="navigationContainer">
+        <div className="HomeNavigationContainer">
           <Link to="/">Home</Link>
           <Link to="/flights">Manage</Link>
         </div>
