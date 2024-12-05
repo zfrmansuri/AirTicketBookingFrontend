@@ -72,7 +72,13 @@ const FlightListPage = () => {
     }
   }, [origin, destination, date]);
 
-  if (loading) return <p>Loading flights...</p>;
+  if (loading){
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
   if (error) return <div className="No-Matching-Flights-Error"><p>{error}</p></div>;
 
   const handleBookNow = (flightId) => {
