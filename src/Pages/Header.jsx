@@ -34,8 +34,9 @@ const Header = () => {
           <img src={logo} alt="logo" />
         </div>
         <div className="HomeNavigationContainer">
-          <Link to="/">Home</Link>
-          <Link to="/flights">Manage</Link>
+          {/* <Link to="/">Home</Link>
+          <Link to="/flights">Manage</Link> */}
+          <p>SimplyFly</p>
         </div>
         <div className="loginRegister">
           {isAuthenticated() ? (

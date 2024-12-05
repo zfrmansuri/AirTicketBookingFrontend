@@ -64,7 +64,13 @@ const SeatSelectionPage = () => {
     }
   }, [flightId]);
 
-  if (loading) return <p>Loading flight details...</p>;
+  if (loading){
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
   if (error) return <p>{error}</p>;
 
   const handleSeatClick = (seatId) => {
