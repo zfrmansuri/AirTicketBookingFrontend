@@ -5,6 +5,8 @@ const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const bookingsPerPage = 7;
 
   const getToken = () => {
     const token = localStorage.getItem("token");
@@ -96,6 +98,25 @@ const BookingHistory = () => {
     }
   };
 
+  const totalPages = Math.ceil(bookingHistory.length / bookingsPerPage);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  const paginatedBookings = bookingHistory.slice(
+    (currentPage - 1) * bookingsPerPage,
+    currentPage * bookingsPerPage
+  );
+
   if (loading) {
     return <div className="bookingsContainer">Loading...</div>;
   }
@@ -108,43 +129,66 @@ const BookingHistory = () => {
     <div className="bookingsContainer">
       <h2>My Booking History</h2>
       {bookingHistory.length > 0 ? (
-        <table className="bookingsTable">
-          <thead>
-            <tr>
-              <th>Booking ID</th>
-              <th>Flight ID</th>
-              <th>Date</th>
-              <th>Seats</th>
-              <th>Total Price</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookingHistory.map((booking) => (
-              <tr key={booking.bookingId}>
-                <td>{booking.bookingId}</td>
-                <td>{booking.flightId}</td>
-                <td>{new Date(booking.bookingDate).toLocaleDateString()}</td>
-                <td>{booking.numberOfSeats}</td>
-                <td>₹{booking.totalPrice}</td>
-                <td>{booking.status}</td>
-                <td>
-                  <button
-                    className="cancelButton"
-                    onClick={() => {
-                      if (window.confirm("Are you sure you want to cancel this booking?")) {
-                        deleteBooking(booking.bookingId);
-                      }
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
+        <>
+          <table className="bookingsTable">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Flight</th>
+                <th>Date</th>
+                <th>Seats</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paginatedBookings.map((booking) => (
+                <tr key={booking.bookingId}>
+                  <td>{booking.bookingId}</td>
+                  <td>{booking.origin} to {booking.destination} ({booking.flightNumber})</td>
+                  <td>{new Date(booking.bookingDate).toLocaleDateString()}</td>
+                  <td>{booking.numberOfSeats}</td>
+                  <td>₹{booking.totalPrice}</td>
+                  <td>{booking.status}</td>
+                  <td>
+                    <button
+                      className="cancelButton"
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to cancel this booking?")) {
+                          deleteBooking(booking.bookingId);
+                        }
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button
+              className="paginationButton"
+              onClick={handlePrevious}
+              disabled={currentPage === 1}
+            >
+              &lt; Previous
+            </button>
+            <span className="pageInfo">
+              {currentPage} of {totalPages}
+            </span>
+            <button
+              className="paginationButton"
+              onClick={handleNext}
+              disabled={currentPage === totalPages}
+            >
+              Next &gt;
+            </button>
+          </div>
+        </>
       ) : (
         <p>No booking history found.</p>
       )}
