@@ -29,7 +29,8 @@ const Users = () => {
       setUsers(usersData);
     } catch (err) {
       console.error("Failed to fetch users by role:", err);
-      setError(err.response?.data?.Message || "An error occurred while fetching users.");
+      setError(err.response?.data?.message || "An error occurred while fetching users.");
+      setUsers("");
     } finally {
       setLoading(false);
     }

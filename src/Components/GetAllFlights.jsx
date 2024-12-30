@@ -9,6 +9,7 @@ const GetAllFlights = () => {
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [ownerNames, setOwnerNames] = useState({});
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -18,7 +19,31 @@ const GetAllFlights = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        // console.log(response.data)
+        const flightsData = response.data.$values || [];
         setFlights(response.data.$values || []);
+        console.log(response.data.$values)
+
+        // Fetch usernames for flightOwnerId
+        const usernames = {};
+        await Promise.all(
+          flightsData.map(async (flight) => {
+            if (flight.flightOwnerId) {
+              const ownerResponse = await axios.get(
+                `https://localhost:7136/api/Flight/GetUserNameById?id=${flight.flightOwnerId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                  },
+                }
+              );
+              usernames[flight.flightOwnerId] = ownerResponse.data.username;
+            }
+          })
+        );
+
+        setOwnerNames(usernames);
+
       } catch (err) {
         setError('Failed to fetch flight details');
       } finally {
@@ -110,10 +135,11 @@ const GetAllFlights = () => {
         <thead>
           <tr>
             <th>Flight Number</th>
+            <th>Flight Owner</th> {/* New Column */}
             <th>Origin</th>
             <th>Destination</th>
             <th>Departure Date</th>
-            <th>Seats Available</th>
+            <th>Total Seats</th>
             <th>Price Per Seat</th>
             <th>Actions</th>
           </tr>
@@ -122,6 +148,7 @@ const GetAllFlights = () => {
           {flights.map((flight) => (
             <tr key={flight.flightId}>
               <td>{flight.flightNumber}</td>
+              <td>{ownerNames[flight.flightOwnerId] || 'Loading...'}</td> {/* Flight Owner */}
               <td>{flight.origin}</td>
               <td>{flight.destination}</td>
               <td>{new Date(flight.departureDate).toLocaleString()}</td>
@@ -265,3 +292,6 @@ const GetAllFlights = () => {
 };
 
 export default GetAllFlights;
+
+
+
