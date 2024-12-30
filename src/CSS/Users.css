@@ -322,3 +322,42 @@
   font-weight: 500;
   color: #4f004f;
 }
+
+
+
+/* ----------------- */
+.searchBar {
+  margin: 10px 0;
+  text-align: right;
+}
+
+.searchBar input {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination span {
+  padding: 8px 16px;
+}

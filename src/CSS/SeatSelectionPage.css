@@ -202,3 +202,59 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+
+/* ----------------------- */
+.seat-confirmation-popup {
+  font-family: 'Parkinsans';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.3);
+  padding: 25px;
+  z-index: 1000;
+  border-radius: 8px;
+}
+
+.seat-popup-content h3 {
+  margin-bottom: 16px;
+}
+
+.seat-popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.seat-confirm-button,
+.seat-cancel-button {
+  font-weight: 600;
+  padding: 8px 18%;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.seat-confirm-button {
+  background-color: green;
+  color: white;
+  transition: 0.3s ease-in;
+}
+
+.seat-cancel-button {
+  background-color: red;
+  color: white;
+  transition: 0.3s ease-in;
+}
+
+.seat-confirm-button:hover{
+  background-color: rgb(4, 75, 4);
+}
+
+.seat-cancel-button:hover{
+  background-color: rgb(146, 9, 9);
+}
