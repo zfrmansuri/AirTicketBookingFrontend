@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; // For decoding the JWT
+import { jwtDecode } from "jwt-decode";
 import { getFlightDetails } from "../Api/flightAPI";
 import AdminDashboard from "../Pages/AdminDashboard";
 import FlightOwnerDashboard from "../Pages/FlightOwnerDashboard";
 import UserDashboard from "../Pages/UserDashboard";
-import "../CSS/SeatSelectionPage.css"; // Add CSS file
-import axios from "axios"; // For API requests
+import "../CSS/SeatSelectionPage.css";
+import axios from "axios";
 
-// Helper function to get the user's role from the JWT
 const getUserRole = () => {
   const token = localStorage.getItem("token");
   if (!token) return null;
   try {
     const decodedToken = jwtDecode(token);
-    return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Microsoft Identity role claim
+    return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
   } catch (error) {
     console.error("Error decoding token:", error);
     return null;
@@ -29,6 +28,7 @@ const SeatSelectionPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dashboard, setDashboard] = useState(null);
+  const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
   useEffect(() => {
     const fetchFlightDetails = async () => {
@@ -45,7 +45,6 @@ const SeatSelectionPage = () => {
 
     fetchFlightDetails();
 
-    // Set the appropriate dashboard based on user role
     const role = getUserRole();
     if (role) {
       switch (role) {
@@ -64,7 +63,7 @@ const SeatSelectionPage = () => {
     }
   }, [flightId]);
 
-  if (loading){
+  if (loading) {
     return (
       <div className="loading-spinner">
         <div className="spinner"></div>
@@ -74,6 +73,11 @@ const SeatSelectionPage = () => {
   if (error) return <p>{error}</p>;
 
   const handleSeatClick = (seatId) => {
+    if (selectedSeats.length >= 5 && !selectedSeats.includes(seatId)) {
+      alert("You can book a maximum of 5 seats.");
+      return;
+    }
+
     if (!selectedSeats.includes(seatId)) {
       setSelectedSeats([...selectedSeats, seatId]);
     } else {
@@ -81,42 +85,37 @@ const SeatSelectionPage = () => {
     }
   };
 
-  const handleBooking = async () => {
-    if(selectedSeats.length <= 0){
-      alert("Please Select Atleast One Seat to Book!")
+  const handleConfirmBooking = async () => {
+    const payload = {
+      flightId: Number(flightId),
+      seatIds: selectedSeats.map(
+        (seatId) => seats.find((s) => s.flightSeatId === seatId)?.seatNumber
+      ),
+    };
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("You must be logged in to book tickets.");
+      return;
     }
-    else{
-      const payload = {
-        flightId: Number(flightId),
-        seatIds: selectedSeats.map(
-          (seatId) => seats.find((s) => s.flightSeatId === seatId)?.seatNumber
-        ), // Map seat IDs to their seat numbers
-      };
-  
-      const token = localStorage.getItem("token");
-  
-      if (!token) {
-        alert("You must be logged in to book tickets.");
-        return;
-      }
-  
-      try {
-        const response = await axios.post(
-          "https://localhost:7136/api/Booking/BookTicket",
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        alert("Booking Completed Successfully!");
-        console.log(response.data);
-        window.location.reload();
-      } catch (error) {
-        console.error("Error booking tickets:", error);
-        alert(error.response?.data?.message || "Booking Failed. Please try again.");
-      }
+
+    try {
+      const response = await axios.post(
+        "https://localhost:7136/api/Booking/BookTicket",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Booking Completed Successfully!");
+      console.log(response.data);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error booking tickets:", error);
+      alert(error.response?.data?.message || "Booking Failed. Please try again.");
     }
   };
 
@@ -158,7 +157,10 @@ const SeatSelectionPage = () => {
               </tr>
             </tbody>
           </table>
-          <button className="continue-button" onClick={handleBooking}>
+          <button
+            className="continue-button"
+            onClick={() => setShowConfirmationPopup(true)}
+          >
             Book Now
           </button>
         </div>
@@ -189,6 +191,36 @@ const SeatSelectionPage = () => {
           <div><span className="guid-selected"></span>Selected Seats</div>
         </div>
       </div>
+
+      {/* Confirmation Popup */}
+      {showConfirmationPopup && (
+        <div className="seat-confirmation-popup">
+          <div className="seat-popup-content">
+            <h3>Confirm Booking</h3>
+            <p>
+              Are you sure you want to book {selectedSeats.length} seats for a total of ₹
+              {totalPrice}?
+            </p>
+            <div className="seat-popup-buttons">
+              <button
+                className="seat-confirm-button"
+                onClick={() => {
+                  setShowConfirmationPopup(false);
+                  handleConfirmBooking();
+                }}
+              >
+                Confirm
+              </button>
+              <button
+                className="seat-cancel-button"
+                onClick={() => setShowConfirmationPopup(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
