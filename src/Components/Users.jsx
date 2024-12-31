@@ -13,7 +13,7 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1); // Current page for pagination
   const [searchTerm, setSearchTerm] = useState(""); // Search term for filtering users
 
-  const USERS_PER_PAGE = 6; // Maximum users to display per page
+  const USERS_PER_PAGE = 7; // Maximum users to display per page
 
   // Function to fetch users by role
   const fetchUsersByRole = async (role) => {

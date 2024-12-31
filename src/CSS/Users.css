@@ -329,12 +329,15 @@
 .searchBar {
   margin: 10px 0;
   text-align: right;
+  position:fixed;
+  top: 20vh;
 }
 
 .searchBar input {
   padding: 8px;
   width: 250px;
-  border: 1px solid #ccc;
+  border: 2px solid rgb(26, 172, 26);
+  font-family: 'Poppins';
   border-radius: 4px;
 }
 
@@ -344,13 +347,24 @@
   margin-top: 20px;
 }
 
-.pagination button {
+/* .pagination button {
   padding: 8px 16px;
   margin: 0 5px;
   border: 1px solid #ccc;
   background-color: #f4f4f4;
   cursor: pointer;
   border-radius: 4px;
+} */
+
+.pagination button {
+  padding: 8px 10px;
+  width: 90px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: 'Poppins';
 }
 
 .pagination button:disabled {
