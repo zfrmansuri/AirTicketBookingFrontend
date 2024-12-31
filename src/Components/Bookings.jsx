@@ -22,10 +22,56 @@ const Bookings = () => {
     setIsPopupVisible(false);
   };
 
-  const handleCancelClick = async (bookingId) => {
+  // const handleCancelClick = async (bookingId, bookingDate) => {
+    
+  //   console.log(bookingDate)
+  //   console.log(Date.now())
+  //   if(bookingDate < Date.now()){
+  //     window.alert("You Can't Cancel Earlier Bookings");
+  //     return
+  //   }
+  //   const confirmCancel = window.confirm("Are you sure you want to cancel this booking?");
+  //   if (!confirmCancel) return;
+
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const response = await axios.delete(
+  //       `https://localhost:7136/api/Booking/CancelBooking?booking_Id=${bookingId}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       alert("Booking canceled successfully.");
+  //       setBookings((prevBookings) =>
+  //         prevBookings.filter((b) => b.bookingId !== bookingId)
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to cancel booking:", error);
+  //     alert(error.response?.data?.Message || "An error occurred while canceling the booking.");
+  //   }
+  // };
+
+
+  const handleCancelClick = async (bookingId, bookingDate) => {
+    const bookingDateTime = new Date(bookingDate); // Convert bookingDate to Date object
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set today's time to midnight
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1); // Get yesterday's date
+    
+    if (bookingDateTime < yesterday) {
+      window.alert("You can't cancel bookings for Departed Flights.");
+      return;
+    }
+  
     const confirmCancel = window.confirm("Are you sure you want to cancel this booking?");
     if (!confirmCancel) return;
-
+  
     try {
       const token = localStorage.getItem("token");
       const response = await axios.delete(
@@ -36,7 +82,7 @@ const Bookings = () => {
           },
         }
       );
-
+  
       if (response.status === 200) {
         alert("Booking canceled successfully.");
         setBookings((prevBookings) =>
@@ -48,6 +94,8 @@ const Bookings = () => {
       alert(error.response?.data?.Message || "An error occurred while canceling the booking.");
     }
   };
+  
+  
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -149,7 +197,7 @@ const Bookings = () => {
                     </button>
                     <button
                       className="cancelButton"
-                      onClick={() => handleCancelClick(booking.bookingId)}
+                      onClick={() => handleCancelClick(booking.bookingId ,booking.bookingDate )}
                     >
                       Cancel
                     </button>
