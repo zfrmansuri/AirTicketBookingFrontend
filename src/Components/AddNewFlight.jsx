@@ -37,6 +37,16 @@ const AddNewFlight = () => {
       return;
     }
 
+    if (new Date(flightDetails.departureDate) <= new Date()) {
+      setError("Departure date must be in the future.");
+      return;
+    }
+
+    if (flightDetails.origin.trim() === flightDetails.destination.trim()) {
+      setError("Origin and Destination cannot be the same.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://localhost:7136/api/Flight/AddFlight",
@@ -88,6 +98,7 @@ const AddNewFlight = () => {
               type="text"
               name="origin"
               placeholder="Origin"
+              maxLength="30"
               className="add-flight-input-field"
               value={flightDetails.origin}
               onChange={handleInputChange}
@@ -120,6 +131,7 @@ const AddNewFlight = () => {
               value={flightDetails.availableSeats}
               onChange={handleInputChange}
               min="1"
+              max="1000"
             />
             <input
               type="number"

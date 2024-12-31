@@ -96,6 +96,10 @@ const FlightSearch = () => {
   }, [origin, flights]);
 
   const handleSearch = () => {
+    if (!validateInput()) {
+      return; // Stop if validation fails
+    }
+
     const adjustedDate = date ? new Date(date) : null;
     if (adjustedDate) {
       adjustedDate.setDate(adjustedDate.getDate() + 1);
@@ -165,18 +169,14 @@ const FlightSearch = () => {
         <div className="dateContainer">
           <div className="dateWrapper">
             <DatePicker
-              className="DatePicker"
+              className={`DatePicker ${error.includes("Travel date") ? "invalid-input" : ""}`}
               selected={date}
               onChange={(date) => setDate(date)}
               placeholderText="Select date"
               dateFormat="yyyy-MM-dd"
               minDate={new Date()} // Set minimum selectable date to today
             />
-            <img
-              src={DateImg}
-              alt="Calendar Icon"
-              className="calendarIcon"
-            />
+            <img src={DateImg} alt="Calendar Icon" className="calendarIcon" />
           </div>
         </div>
         <button
