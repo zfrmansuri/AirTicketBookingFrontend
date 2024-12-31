@@ -1,0 +1,43 @@
+.aboutUsContainer, .contactUsContainer {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 85vh;
+    background-image: url("../Images/main-bg.png"); */
+
+    background-image: url("../Images/main-bg.png");
+    width: 100vw;
+    height: 84vh;
+    position: relative;
+    top: 8vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 5vw;
+    box-sizing: border-box;
+  }
+  
+  .imageContainer img {
+    width: 300px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .descriptionContainer {
+    max-width: 600px;
+  }
+  
+  .descriptionContainer h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .descriptionContainer p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  

@@ -16,15 +16,21 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.HomeNavigationContainer {
+.HomeNavigationContainer p{
     font-size: 28px;
     color: green;
-    margin-left: 110px;
+    margin-left: 36vw;
     font-weight: 600;
     font-family: 'Parkinsans';
+    text-decoration: none;
     /* display: none; */
 }
-
+a {
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
 .logoContainer img {
     display: none;
     width: 40px;
@@ -79,4 +85,24 @@
 
 .loginRegister button:focus {
     outline: none; /* Remove focus outline */
+}
+
+
+.HomeNavigationContainer{
+    display: flex;
+}
+
+.Navigation-Links{
+    font-size: 23px;
+    margin-left: 30px;
+    color: rgb(95, 95, 95);
+    text-decoration: underline 0.10em rgba(0, 0, 0, 0);
+    transition: text-decoration-color 0.3s;
+    font-weight: 400;
+    font-family: "Parkinsans", sans-serif;
+}
+
+.Navigation-Links:hover{
+    color: black;
+    text-decoration-color: rgb(95, 95, 95);
 }

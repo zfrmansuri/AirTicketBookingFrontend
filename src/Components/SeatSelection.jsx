@@ -100,6 +100,12 @@ const SeatSelectionPage = () => {
       return;
     }
 
+    
+    if (selectedSeats.length == 0){
+      alert("Select Atleast One Seat to Book");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://localhost:7136/api/Booking/BookTicket",

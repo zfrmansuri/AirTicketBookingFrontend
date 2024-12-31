@@ -77,11 +77,11 @@ const Login = () => {
 
             if (redirectTo === "/") {
                 if (userRole === "Admin") {
-                    navigate("/admin-dashboard");
+                    navigate("/admin-dashboard/flight-search");
                 } else if (userRole === "User") {
-                    navigate("/user-dashboard");
+                    navigate("/user-dashboard/flight-search");
                 } else if (userRole === "FlightOwner") {
-                    navigate("/flightowner-dashboard");
+                    navigate("/flightowner-dashboard/flight-search");
                 } else {
                     console.error("Unknown user role");
                 }
