@@ -16,6 +16,7 @@ const FlightSearch = () => {
   const [flights, setFlights] = useState([]);
   const [origins, setOrigins] = useState([]);
   const [filteredDestinations, setFilteredDestinations] = useState([]);
+  const [error, setError] = useState(""); // Add error state
 
   const navigate = useNavigate();
 
@@ -32,45 +33,22 @@ const FlightSearch = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const fetchFlights = async () => {
-  //     try {
-  //       const response = await fetch("https://localhost:7136/api/Flight/GetAllFlightsForEveryone");
-  //       const data = await response.json();
-  //       if (data && data.$values) {
-  //         setFlights(data.$values);
-
-  //         const uniqueOrigins = [...new Set(data.$values.map((flight) => flight.origin))];
-  //         setOrigins(uniqueOrigins);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching flights:", error);
-  //     }
-  //   };
-
-  //   fetchFlights();
-  // }, []);
-
-
   useEffect(() => {
     const fetchFlights = async () => {
       try {
         const response = await fetch("https://localhost:7136/api/Flight/GetAllFlightsForEveryone");
         const data = await response.json();
-  
+
         if (data && data.$values) {
           const today = new Date();
-          today.setHours(0, 0, 0, 0); // Set time to start of the day
-  
-          // Filter flights for today and future
+          today.setHours(0, 0, 0, 0);
+
           const validFlights = data.$values.filter((flight) => {
-            const flightDate = new Date(flight.departureDate); // Assuming `departureDate` holds the flight date
-            return flightDate >= today; // Include only today and future dates
+            const flightDate = new Date(flight.departureDate);
+            return flightDate >= today;
           });
-  
+
           setFlights(validFlights);
-  
-          // Extract unique origins
           const uniqueOrigins = [...new Set(validFlights.map((flight) => flight.origin))];
           setOrigins(uniqueOrigins);
         }
@@ -78,11 +56,9 @@ const FlightSearch = () => {
         console.error("Error fetching flights:", error);
       }
     };
-  
+
     fetchFlights();
   }, []);
-  
-
 
   useEffect(() => {
     if (origin) {
@@ -94,6 +70,23 @@ const FlightSearch = () => {
       setFilteredDestinations([]);
     }
   }, [origin, flights]);
+
+  const validateInput = () => {
+    if (!origin) {
+      setError("Origin is required.");
+      return false;
+    }
+    if (!destination) {
+      setError("Destination is required.");
+      return false;
+    }
+    if (!date) {
+      setError("Travel date is required.");
+      return false;
+    }
+    setError(""); // Clear any previous errors
+    return true;
+  };
 
   const handleSearch = () => {
     if (!validateInput()) {
@@ -114,7 +107,7 @@ const FlightSearch = () => {
     });
   };
 
-  const isFormValid = origin && destination && date; // Ensure all fields are filled
+  const isFormValid = origin && destination && date;
 
   return (
     <div className="flightSearchContainer">
@@ -174,16 +167,17 @@ const FlightSearch = () => {
               onChange={(date) => setDate(date)}
               placeholderText="Select date"
               dateFormat="yyyy-MM-dd"
-              minDate={new Date()} // Set minimum selectable date to today
+              minDate={new Date()}
             />
             <img src={DateImg} alt="Calendar Icon" className="calendarIcon" />
           </div>
         </div>
+        {error && <p className="errorMessage">{error}</p>}
         <button
           type="button"
           onClick={handleSearch}
           className="SearchButton"
-          disabled={!isFormValid} // Disable button if form is incomplete
+          disabled={!isFormValid}
         >
           Search Flights
         </button>
